@@ -1,0 +1,30 @@
+{
+    "name": "mcbot",
+    "description": "Testing my discord bot",
+    "version": "1.0.0",
+    "main": "mcbot.js",
+    "scripts": {
+        "start": "node mcbot.js"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "beautify": "0.0.8",
+        "canvas": "^2.6.1",
+        "cheerio": "^1.0.0-rc.3",
+        "common-tags": "^1.8.0",
+        "dateformat": "^3.0.3",
+        "discord.js": "^12.2.0",
+        "discord.js-commando": "^0.10.0",
+        "dotenv": "^8.2.0",
+        "humanize-duration": "^3.24.0",
+        "join": "^3.0.0",
+        "minecraft-server-util": "^1.4.3",
+        "moment": "^2.29.1",
+        "ms": "^2.1.2",
+        "mysql": "^2.18.1",
+        "node": "^14.4.0",
+        "request": "^2.88.2",
+        "weather-js": "^2.0.0",
+        "yarn": "^1.22.4"
+    }
+}
