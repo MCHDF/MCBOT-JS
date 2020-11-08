@@ -104,3 +104,7 @@ dist
 .tern-port
 
 .json
+
+imgs/
+fonts/
+jsons/
