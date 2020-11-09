@@ -1,8 +1,6 @@
 # MCBOT
 Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니다!
 
-JavaScript Base Discord.js BOT
-
 **마크다운 문법을 잘 다루지 못합니다..설명 가독성이 불친절 하더라도 양해 부탁드립니다.**
 
 ## 봇 서버 시스템 사양
@@ -20,7 +18,7 @@ JavaScript Base Discord.js BOT
 
 0. discord js : v12.2.0
 1. Language : JavaScript
-2. IDE(?) : VSCode
+2. IDE : VSCode
 
 ***
 
