@@ -16,7 +16,7 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 
 ## 봇 정보
 
-0. discord js : v12.2.0
+0. discord js : v12.4.1
 1. Language : JavaScript
 2. IDE : VSCode
 
