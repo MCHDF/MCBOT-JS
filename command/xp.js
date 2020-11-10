@@ -1,10 +1,17 @@
 const Canvas = require('canvas');
-const { MessageAttachment } = require('discord.js');
+const { MessageAttachment, MessageEmbed } = require('discord.js');
 const { join } = require('path');
 
 module.exports.run = async (bot, message, args, con) => {
 
     const member = message.mentions.users.first() || message.author;
+    
+    let embed = new MessageEmbed()
+    .setTitle(`XP - ${member.username}`)
+    .setColor("YELLOW")
+    .setDescription('불러오는 중...')
+    let msg = await message.channel.send(embed);
+
     const avatar = await Canvas.loadImage(member.displayAvatarURL({ format: "png", size: 1024 }));
     const background = await Canvas.loadImage(join(__dirname, "..", "imgs", "xp_bg.png"));
     con.query(`select * from xp where guildId = '${message.guild.id}' order by lvl DESC, xp DESC;`, (err, rows) => {
@@ -112,6 +119,7 @@ module.exports.run = async (bot, message, args, con) => {
         //ctx.drawImage(avatar, x, y, width, height);
 
         const attachment = new MessageAttachment(canvas.toBuffer(), `${message.guild.name}_${member.tag}_rank.png`);
+        msg.delete();
         message.channel.send(attachment);
     });
 }
