@@ -62,6 +62,10 @@ module.exports = {
                     con.query(`UPDATE xp Set xp = ${xp + 360} WHERE id = '${message.author.id}'`);
                 } else if (lvl >= 45 || lvl <= 49) {
                     con.query(`UPDATE xp Set xp = ${xp + 390} WHERE id = '${message.author.id}'`);
+                } else if (lvl >= 50) {
+                    con.query(`UPDATE xp Set xp = ${xp + 400} WHERE id = '${message.author.id}'`);
+                } else if (lvl >= 75) {
+                    con.query(`UPDATE xp Set xp = ${xp + 500} WHERE id = '${message.author.id}'`);
                 }
             })
         }

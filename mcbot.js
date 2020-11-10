@@ -157,9 +157,6 @@ bot.on('message', async msg => {
     } else {
       let xp = rows[0].xp;
       let lvl = rows[0].lvl;
-      if (lvl === 50) {
-        return;
-      }
       con.query(`UPDATE xp Set xp = ${xp + generatexp()} WHERE guildId = '${msg.guild.id}' AND id = '${msg.author.id}'`);
 
       let nxtlvl = lvl * 300
