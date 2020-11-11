@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
         if (message.guild.id != '703807451325268088') {
-            return;
+            return message.channel.send('이거 여기서 쓰는게 아닐텐데요...');
         }
 
         if (!args[0]) {
