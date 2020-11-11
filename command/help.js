@@ -27,7 +27,7 @@ module.exports = {
             embed
                 // 미니게임 명령어 설명
                 .addField('\u200B', '**미니게임**')
-                .addField('🏆 Ranking 🏆', '```미니게임 랭킹을 알아봅니다!\n사용법 : ' + prefix + '랭킹```')
+                .addField('🏆 Ranking 🏆', '```미니게임의 XP 랭킹을 알아봅니다!\n사용법 : ' + prefix + '랭킹```')
                 .addField('💰 Economy', '```이코노미 관련 정보를 알려드려요!\n사용법 : ' + prefix + 'eco```')
                 .addField('🖐, ✌, 👊', '```미니게임 - 가위바위보를 시작합니다!\n사용법 : ' + prefix + 'rps```')
                 .addField("🎲 XP 🎲", "```현재 자신의 경험치를 표시해줘요!\n사용법 : " + prefix + "xp <유저 멘션>\n기본값 : 자기 자신```")
