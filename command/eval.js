@@ -3,11 +3,8 @@ const beautify = require('beautify');
 
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
-        if (message.author.id != '468781931182555136') {
-            return message.channel.send('ACCESS_DENIED');
-        }
         if (!args[0]) {
-            return message.channel.send('?');
+            return message.channel.send('어.....네?');
         }
         try {
             if (args.join(' ').toLowerCase().includes("token")) {
