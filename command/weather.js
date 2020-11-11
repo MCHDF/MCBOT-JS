@@ -18,13 +18,13 @@ module.exports = {
                 
             let url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=';
             for (var j = 0; j < args.length; j++) {
-                url += `${encodeURI(args[j])}+`;
+                url += `${encodeURI(args.slice(0).join(" "))}+`;
             }
 
             url += encodeURI('날씨');
 
             let waitEmbed = new MessageEmbed()
-                .setTitle(`${args} 날씨`)
+                .setTitle(`${args.slice(0).join(" ")} 날씨`)
                 .setTimestamp()
                 .setFooter('검색 엔진 : NAVER')
                 .setDescription('오늘 하루 예상 날씨 정보를 불러오고있어요...조금만 기다려주세요!')
@@ -79,7 +79,7 @@ module.exports = {
                         msg.edit(embed);
                     } else {
                         let embed = new MessageEmbed()
-                            .setTitle(`${args} 날씨`)
+                            .setTitle(`${args.slice(0).join(" ")} 날씨`)
                             .setTimestamp()
                             .setFooter('검색 엔진 : NAVER\n발표 : 기상청\n제공 : 웨더아이')
                             .setDescription('오늘 하루 예상 날씨를 표시합니다!\n\n(네이버 검색 결과를 기준으로 표시하고있습니다.)')
