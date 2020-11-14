@@ -22,7 +22,7 @@ module.exports = {
             });
         } else {
             if (!args[0]) {
-                return message.channel.send(`:bulb: 접두사 설정은 이렇게 해요! \`${prefix}prefix <바꿀 접두사>\`\n:bulb: 현재 접두사 : \`${prefix}\`\n(음악 명령어에는 적용되지않아요!)`);
+                return message.channel.send(`:bulb: 접두사 설정은 이렇게 해요!\n\`${prefix}prefix <바꿀 접두사>\`\n:bulb: 현재 접두사 : \`${prefix}\`\n(음악 명령어에는 적용되지않아요!)`);
             }
             let prefixSet = JSON.parse(fs.readFileSync('./jsons/prefixSet.json', 'utf-8'));
 
