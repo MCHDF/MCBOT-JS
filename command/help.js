@@ -7,7 +7,7 @@ module.exports = {
             .setAuthor("MCBOT", "https://i.imgur.com/Togof5u.png")
             .setThumbnail("https://i.imgur.com/Togof5u.png")
             .setDescription('모든 명령어는 ' + prefix + ' 를 붙여 사용합니다.')
-            .setFooter(`Request by ${message.author.tag} • 문의 : MCHDF#9999`);
+            .setFooter(`Request by ${message.guild.name} • 문의 : MCHDF#9999`);
         if (args[0] === '일반') {
 
             embed
@@ -58,13 +58,16 @@ module.exports = {
                 // 권한이 필요한 모더레이터 전용 명령어 설명
                 .addField('👮‍♂️ **운영자 전용 명령어**', "```권한이 필요한 운영자 전용 도움말을 표시해요!\n사용법 : " + prefix + "help 도구```")
         }
-        return message.channel.send(embed);
+        message.fetch(message.id).then(m => {
+            m.react("📜");
+        });
+        return message.author.send(embed);
     }
 }
 
 module.exports.help = {
     name: "help",
-    aliases: ['h'],
+    aliases: ['도움말','h'],
     category: "",
     description: "Help for MCBOT what have commands"
 }
