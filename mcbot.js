@@ -3,6 +3,7 @@ const fs = require("fs");
 const mysql = require('mysql');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
 const Badwords = require("./jsons/fiterWords.json");
 require('dotenv').config();
 
@@ -14,10 +15,14 @@ fs.readdir("./command/", (err, files) => {
     console.log("명령어를 찾지 못했어요...");
     return;
   }
+
   jsfile.forEach((f, i) => {
     let props = require(`./command/${f}`);
-    console.log(`[ ${f} ] Load Complete`);
+    console.log(`[ ${f} ] load Complete`);
     bot.commands.set(props.help.name, props);
+    props.help.aliases.forEach(alias => {
+      bot.aliases.set(alias, props.help.name)
+    })
   });
 });
 
@@ -58,11 +63,10 @@ bot.on('ready', () => {
   }, 3000);
 });
 
-//여러 길드의 ID와 길드 창설자 ID를 DB로 추출
 bot.on('guildCreate', (guild) => {
   try {
-    con.query(`INSERT INTO Guilds (guildId, GuildOwnerId) VALUES('${guild.id}', ${guild.ownerID})`);
-    con.query(`INSERT INTO GuildConfigurable (guildId) VALUES('${guild.id}')`);
+    con.query(`INSERT INTO Guilds (guildId, GuildOwnerId) VALUES('${guild.id}', ${guild.ownerID});`);
+    con.query(`INSERT INTO GuildConfigurable (guildId) VALUES('${guild.id}');`);
   } catch (err) {
     console.log(err)
   }
@@ -70,29 +74,39 @@ bot.on('guildCreate', (guild) => {
 
 bot.on('guildDelete', async (guild) => {
   try {
-    await con.query(`DELETE FROM Guilds WHERE guildId = '${guild.id}'`);
-    await con.query(`DELETE FROM xp WHERE guildId = '${guild.id}'`);
-    await con.query(`DELETE FROM GuildConfigurable WHERE guildId = '${guild.id}'`);
+    await con.query(`DELETE FROM Guilds WHERE guildId = '${guild.id}';`);
+    await con.query(`DELETE FROM xp WHERE guildId = '${guild.id}';`);
+    await con.query(`DELETE FROM GuildConfigurable WHERE guildId = '${guild.id}';`);
   } catch (err) {
     console.log(err)
   }
 })
 
-bot.on('message', async msg => {
-  if (msg.author.bot) return;
-  if (msg.channel.type === 'dm') return;
+bot.on('message', async message => {
+  if (message.author.bot) return;
+  if (message.channel.type === 'dm') return;
 
   let prefixSet = JSON.parse(fs.readFileSync('./jsons/prefixSet.json', 'utf-8'));
 
-  if (!prefixSet[msg.guild.id]) {
-    prefixSet[msg.guild.id] = {
+  if (!prefixSet[message.guild.id]) {
+    prefixSet[message.guild.id] = {
       prefixSet: '!'
     };
   }
 
+  let prefix = prefixSet[message.guild.id].prefixSet;
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
+
+  let filterwords = Badwords.BADWORDS;
+  let messageURL = Badwords.messageURL;
+  let foundText = false;
+  
   // 서버 멤버 카운트
-  let Guild = msg.guild.id;
-  con.query(`select * from GuildConfigurable where guildId = '${Guild}'`, (err, rows) => {
+  let Guild = message.guild.id;
+  con.query(`select * from GuildConfigurable where guildId = '${Guild}';`, (err, rows) => {
     if (err) throw err;
     let guildId = rows[0].guildId;
     let Count = rows[0].Count;
@@ -110,81 +124,71 @@ bot.on('message', async msg => {
     }
   });
 
-  let prefix = prefixSet[msg.guild.id].prefixSet;
-
-  let messageArray = msg.content.split(" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
-
-  let filterwords = Badwords.BADWORDS;
-  let msgURL = Badwords.msgURL;
-  let foundText = false;
-
   for (var i in filterwords) {
-    if (msg.content.toLowerCase().includes(filterwords[i].toLowerCase())) {
+    if (message.content.toLowerCase().includes(filterwords[i].toLowerCase())) {
       foundText = true;
     }
   }
-  for (var k in msgURL) {
-    if (msg.content.toLowerCase().includes(msgURL[k].toLowerCase())) {
+  for (var k in messageURL) {
+    if (message.content.toLowerCase().includes(messageURL[k].toLowerCase())) {
       foundText = false;
     }
   }
 
-  let msgchid = msg.channel.id;
-  con.query(`SELECT * FROM Guilds WHERE guildId = '${msg.guild.id}'`, (err, rows) => {
+  let messagechid = message.channel.id;
+  con.query(`SELECT * FROM Guilds WHERE guildId = '${message.guild.id}';`, (err, rows) => {
     if (err) throw err;
     let exceptionCh = rows[0].exceptionCh;
     if (!exceptionCh) {
       return;
     }
     if (foundText) {
-      if (msgchid === exceptionCh) {
+      if (messagechid === exceptionCh) {
         return;
       } else {
-        msg.delete();
-        msg.reply("(이쁜말)");
+        message.delete();
+        message.reply("(이쁜말)");
       }
     }
   });
 
   //xp 시스템
-  con.query(`SELECT * FROM xp WHERE guildId = '${msg.guild.id}' AND id = '${msg.author.id}'`, (err, rows) => {
+  con.query(`SELECT * FROM xp WHERE guildId = '${message.guild.id}' AND id = '${message.author.id}';`, (err, rows) => {
     if (err) throw err;
 
     if (rows.length < 1) {
-      con.query(`INSERT INTO xp (guildId, id, xp, name) VALUES ('${msg.guild.id}', '${msg.author.id}', ${generatexp()}, '${msg.author.username}')`);
+      con.query(`INSERT INTO xp (guildId, id, xp, name) VALUES ('${message.guild.id}', '${message.author.id}', ${generatexp()}, '${message.author.username}');`);
     } else {
       let xp = rows[0].xp;
       let lvl = rows[0].lvl;
-      con.query(`UPDATE xp Set xp = ${xp + generatexp()} WHERE guildId = '${msg.guild.id}' AND id = '${msg.author.id}'`);
+      con.query(`UPDATE xp Set xp = ${xp + generatexp()} WHERE guildId = '${message.guild.id}' AND id = '${message.author.id}';`);
 
       let nxtlvl = lvl * 300
 
       if (nxtlvl <= xp) {
-        con.query(`UPDATE xp SET xp = 0 WHERE guildId = '${msg.guild.id}' AND id = ${msg.author.id}`);
-        con.query(`UPDATE xp SET lvl = ${lvl + 1} WHERE guildId = '${msg.guild.id}' AND id = ${msg.author.id}`);
+        con.query(`UPDATE xp SET xp = 0 WHERE guildId = '${message.guild.id}' AND id = ${message.author.id};`);
+        con.query(`UPDATE xp SET lvl = ${lvl + 1} WHERE guildId = '${message.guild.id}' AND id = ${message.author.id};`);
         let embed = new Discord.MessageEmbed()
           .setTitle('[ Level UP! ]')
-          .setAuthor(`${msg.author.tag}`)
+          .setAuthor(`${message.author.tag}`)
           .setColor('#44f947')
-          .setTimestamp(msg.createAt)
-        msg.channel.send(embed)
+          .setTimestamp(message.createAt)
+        message.channel.send(embed)
       }
     }
   });
 
-  if (!msg.content.startsWith(prefix)) return;
-  let commandfile = bot.commands.get(cmd.slice(prefix.length));
+  if (!message.content.startsWith(prefix)) return;
+  let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
   if (commandfile) {
-    commandfile.run(bot, msg, args, con, prefix);
+    commandfile.run(bot, message, args, con, prefix);
   }
 
 });
 
 bot.on('guildMemberAdd', member => {
   let Guild = member.guild.id;
-  con.query(`SELECT * FROM Guilds WHERE guildId = '${member.guild.id}'`, (err, rows) => {
+  con.query(`SELECT * FROM Guilds WHERE guildId = '${member.guild.id}';`, (err, rows) => {
     let logCh = rows[0].logCh;
     let ch = bot.channels.cache.get(`${logCh}`);
     let avatar = member.user.avatarURL({ size: 1024 });
@@ -210,7 +214,7 @@ bot.on('guildMemberAdd', member => {
     }
   });
   // 서버 멤버 카운트
-  con.query(`select * from GuildConfigurable where guildId = '${Guild}'`, (err, rows) => {
+  con.query(`select * from GuildConfigurable where guildId = '${Guild}';`, (err, rows) => {
     if (err) throw err;
     let guildId = rows[0].guildId;
     let Count = rows[0].Count;
@@ -233,7 +237,7 @@ bot.on('guildMemberAdd', member => {
 bot.on('guildMemberRemove', member => {
   let Guild = member.guild.id;
   con.query(`DELETE FROM xp WHERE id = '${member.id}';`);
-  con.query(`SELECT * FROM Guilds WHERE guildId = '${member.guild.id}'`, (err, rows) => {
+  con.query(`SELECT * FROM Guilds WHERE guildId = '${member.guild.id}';`, (err, rows) => {
     let logCh = rows[0].logCh;
     let ch = bot.channels.cache.get(`${logCh}`);
     let avatar = member.user.avatarURL({ size: 1024 });
@@ -251,7 +255,7 @@ bot.on('guildMemberRemove', member => {
       ch.send(embed);
     }
   });
-  con.query(`select * from GuildConfigurable where guildId = '${Guild}'`, (err, rows) => {
+  con.query(`select * from GuildConfigurable where guildId = '${Guild}';`, (err, rows) => {
     if (err) throw err;
     let guildId = rows[0].guildId;
     let Count = rows[0].Count;
@@ -272,8 +276,8 @@ bot.on('guildMemberRemove', member => {
 });
 
 bot.on('guildMemberUpdate', member => {
-  con.query(`UPDATE xp Set name = '${member.user.username}' WHERE id = '${member.id}'`);
-  con.query(`UPDATE warnUser SET name = '${member.user.username}' WHERE id = '${member.id}'`);
+  con.query(`UPDATE xp Set name = '${member.user.username}' WHERE id = '${member.id}';`);
+  con.query(`UPDATE warnUser SET name = '${member.user.username}' WHERE id = '${member.id}';`);
 });
 
 bot.login(process.env.MCBOT_TOKEN);
