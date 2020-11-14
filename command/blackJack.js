@@ -911,7 +911,7 @@ module.exports = {
 
 module.exports.help = {
     name: "블랙잭",
-    aliases: [''],
+    aliases: ['ㅠㅓ','bj','qmfforwor'],
     category: "",
     description: ""
 }

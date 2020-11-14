@@ -81,7 +81,7 @@ module.exports = {
 
 module.exports.help = {
     name: "자동역할",
-    aliases: [''],
+    aliases: ['오토롤','wkehddurgkf'],
     category: "",
     description: ""
 }

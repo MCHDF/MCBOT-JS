@@ -30,7 +30,7 @@ module.exports = {
 
 module.exports.help = {
     name: "about",
-    aliases: ['봇정보', '봇'],
+    aliases: ['봇정보', '봇', 'bot','뮤ㅐㅕㅅ'],
     category: "moderation",
     description: "Information About MCBOT"
 }

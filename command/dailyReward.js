@@ -47,7 +47,7 @@ module.exports = {
 
 module.exports.help = {
     name: "일일보상",
-    aliases: [''],
+    aliases: ['daily','dlfdlf','일일'],
     category: "",
     description: ""
 }

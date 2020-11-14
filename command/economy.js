@@ -19,7 +19,7 @@ module.exports = {
 
 module.exports.help = {
     name: "eco",
-    aliases: [''],
+    aliases: ['ㄷ채'],
     category: "",
     description: ""
 }

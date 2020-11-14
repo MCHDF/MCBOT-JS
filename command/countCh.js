@@ -67,7 +67,7 @@ module.exports = {
 
 module.exports.help = {
     name: "카운트",
-    aliases: ['age'],
+    aliases: ['count','zkdnsxm'],
     category: "",
     description: ""
 }
