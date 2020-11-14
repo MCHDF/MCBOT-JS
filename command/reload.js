@@ -4,8 +4,12 @@ module.exports = {
         if(message.author.id != '468781931182555136') {
             message.channel.send('ACCESS_DENIED');
         } else {
+            if(args[0] === 'bot') {
+                message.channel.send('봇을 재시작합니다.');
+                process.exit();
+            }
             if(!args[0]){
-                return message.channel.send('재시작할 파일의 이름을 적어주세요!');
+                return message.channel.send('다시 로드할 파일의 이름을 적어주세요!');
             }
             let commandName = args[0];
 
@@ -15,9 +19,9 @@ module.exports = {
                 const pull = require(`./${commandName}.js`)
                 bot.commands.set(pull.help.name, pull)
             } catch (e) {
-                return message.channel.send(`재시작 불가 : \`${commandName}\`\n\`\`\`${e}\`\`\``)
+                return message.channel.send(`리로드 불가 : \`${commandName}.js\`\n\`\`\`${e}\`\`\``)
             }
-            message.channel.send(`파일 \`${commandName}\` 재시작 완료`)
+            message.channel.send(`파일 리로드 : \`${commandName}.js\``)
         }
     }
 }
