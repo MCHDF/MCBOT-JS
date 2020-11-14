@@ -3,14 +3,24 @@ const usedCommand = new Set();
 
 module.exports = {
     run: async (bot, message, args, con) => {
-
-        if (usedCommand.has(message.author.id)) {
-            return message.reply(`:arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!`)
+        if(message.guild.id === '703807451325268088') {
+            if (usedCommand.has(message.author.id)) {
+                return message.reply(`:arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!`)
+            } else {
+                usedCommand.add(message.author.id);
+                setTimeout(() => {
+                    usedCommand.delete(message.author.id);
+                }, 300000);
+            }
         } else {
-            usedCommand.add(message.author.id);
-            setTimeout(() => {
-                usedCommand.delete(message.author.id);
-            }, 300000);
+            if (usedCommand.has(message.author.id)) {
+                return message.reply(`:arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!`)
+            } else {
+                usedCommand.add(message.author.id);
+                setTimeout(() => {
+                    usedCommand.delete(message.author.id);
+                }, 10000);
+            }
         }
 
         let user = message.author;
