@@ -23,7 +23,7 @@ module.exports = {
 
             return message.channel.send(embed);
         } catch (e) {
-
+            return message.channel.send(`\`\`\`${e}\`\`\``)
         }
 
     }
