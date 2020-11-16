@@ -103,7 +103,7 @@ bot.on('message', async message => {
   let filterwords = Badwords.BADWORDS;
   let messageURL = Badwords.messageURL;
   let foundText = false;
-  
+
   // 서버 멤버 카운트
   let Guild = message.guild.id;
   con.query(`select * from GuildConfigurable where guildId = '${Guild}';`, (err, rows) => {
@@ -178,6 +178,10 @@ bot.on('message', async message => {
     }
   });
 
+  if(message.content === 'MCprefix') {
+    return message.channel.send(`:bulb: 현재 서버의 접두사는 \`${prefix}\` 입니다!`);
+  }
+
   if (!message.content.startsWith(prefix)) return;
   let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
   if (commandfile) {
@@ -225,12 +229,12 @@ bot.on('guildMemberAdd', member => {
     let myGuild = bot.guilds.cache.get(`${guildId}`);
     let memberCount = myGuild.memberCount;
     let memberCountChannel = myGuild.channels.cache.get(`${Count}`);
-    if(!ChName) {
+    if (!ChName) {
       memberCountChannel.setName('멤버 수 : ' + memberCount);
     } else {
       memberCountChannel.setName(`${ChName} : ` + memberCount);
     }
-    
+
   });
 });
 
@@ -266,12 +270,12 @@ bot.on('guildMemberRemove', member => {
     let myGuild = bot.guilds.cache.get(`${guildId}`);
     let memberCount = myGuild.memberCount;
     let memberCountChannel = myGuild.channels.cache.get(`${Count}`);
-    if(!ChName) {
+    if (!ChName) {
       memberCountChannel.setName('멤버 수 : ' + memberCount);
     } else {
       memberCountChannel.setName(`${ChName} : ` + memberCount);
     }
-    
+
   });
 });
 
