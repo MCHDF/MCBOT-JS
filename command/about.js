@@ -24,6 +24,9 @@ module.exports = {
             .addField("[ 유저 (중복 포함) ]", `**${bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}**명`, true)
             .addField("[ 채널 ]", `**${bot.channels.cache.size}**개`, true)
             .setFooter("[ 문의 ] : MCHDF#9999")
+        message.fetch(message.id).then(m => {
+            m.react("💰");
+        });
         return message.author.send(embed);
     }
 }
