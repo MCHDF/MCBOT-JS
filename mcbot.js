@@ -182,6 +182,9 @@ bot.on('message', async message => {
     if (message.content === 'MCprefix') {
         return message.channel.send(`:bulb: 현재 서버의 접두사는 \`${prefix}\` 입니다!`);
     }
+    if (message.content === prefix) {
+        return;
+    }
 
     if (!message.content.startsWith(prefix)) return;
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
