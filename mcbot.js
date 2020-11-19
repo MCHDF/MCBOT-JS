@@ -55,7 +55,7 @@ bot.on('ready', () => {
         `길드 : ${bot.guilds.cache.size}개`,
         `유저 : ${bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}명`,
         `채널 : ${bot.channels.cache.size}개`,
-        `MCprefix로 서버별 접두사 확인!`
+        `MCprefix로 서버별 접두사 확인`
     ]
 
     setInterval(function () {
