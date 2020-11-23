@@ -2,10 +2,12 @@ const Discord = require('discord.js');
 const fs = require("fs");
 const mysql = require('mysql');
 const bot = new Discord.Client();
+const Badwords = require("./jsons/fiterWords.json");
+const log = require('./config/logger.js');
+require('dotenv').config();
+
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
-const Badwords = require("./jsons/fiterWords.json");
-require('dotenv').config();
 
 fs.readdir("./command/", (err, files) => {
     if (err) console.log(err);
@@ -65,21 +67,23 @@ bot.on('ready', () => {
 });
 
 bot.on('guildCreate', (guild) => {
+    log.info(`MCBOT이 새로운 길드에 초대됨. 길드 : ${guild.name}`);
     try {
         con.query(`INSERT INTO Guilds (guildId, GuildOwnerId) VALUES('${guild.id}', ${guild.ownerID});`);
         con.query(`INSERT INTO GuildConfigurable (guildId) VALUES('${guild.id}');`);
     } catch (err) {
-        console.log(err)
+        log.error(`Error while joining guild ${err}`)
     }
 });
 
 bot.on('guildDelete', async (guild) => {
+    log.info(`MCBOT이 길드에서 퇴장됨. 길드 : ${guild.name}`);
     try {
         await con.query(`DELETE FROM Guilds WHERE guildId = '${guild.id}';`);
         await con.query(`DELETE FROM xp WHERE guildId = '${guild.id}';`);
         await con.query(`DELETE FROM GuildConfigurable WHERE guildId = '${guild.id}';`);
     } catch (err) {
-        console.log(err)
+        log.error(`Error while exiting guild ${err}`)
     }
 })
 
@@ -190,6 +194,7 @@ bot.on('message', async message => {
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
     if (commandfile) {
         commandfile.run(bot, message, args, con, prefix);
+        log.info(`${message.author.username} uses command '${cmd.slice(prefix.length)}' in ${message.guild.name}`);
     }
 
 });
@@ -284,7 +289,9 @@ bot.on('guildMemberRemove', member => {
 });
 
 bot.on('guildMemberUpdate', member => {
-    con.query(`UPDATE xp Set name = '${member.user.username}' WHERE id = '${member.id}';`);
+    con.query(`UPDATE xp Set name = '${member.user.username}' WHERE id = '${member.id}';`, (err) => {
+        if(err) member.send(`유저분의 정보를 업데이트 하는데 문제가 생겼어요! 아래의 내용을 MCHDF#9999로 알려주세요!\n\`\`\`js\n${err}\`\`\``);
+    });
     con.query(`UPDATE warnUser SET name = '${member.user.username}' WHERE id = '${member.id}';`);
 });
 
