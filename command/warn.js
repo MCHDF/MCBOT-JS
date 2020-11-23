@@ -1,6 +1,9 @@
 const { MessageEmbed } = require("discord.js");
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
+        // if(message.guild.id === '534586842079821824') {
+        //     return; // 일단 이건 상황보고 결정하는걸로
+        // }
         if (!args[0]) {
             if(!message.member.hasPermission(["ADMINISTRATOR"])) {
                 let embed = new MessageEmbed()

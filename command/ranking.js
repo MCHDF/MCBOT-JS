@@ -1,8 +1,11 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (bot, message, args, con) => {
+    // if(message.guild.id === '534586842079821824') {
+    //     return message.channel.send('해당 서버는 XP기능이 제한되어있습니다. 사용을 자제해주세요.');
+    // }
     let embed = new MessageEmbed()
-        .setTitle('[ 랭킹 Top10 ]')
+        .setTitle('[ XP - 랭킹 Top10 ]')
         .setTimestamp()
         .setColor('YELLOW')
         .setDescription(`현재 서버 **${message.guild.name}** 의 XP랭킹 정보를 불러오고 있습니다!`)
@@ -10,8 +13,10 @@ module.exports.run = async (bot, message, args, con) => {
 
     con.query(`SELECT * FROM xp WHERE guildId = '${message.guild.id}' ORDER BY lvl DESC, xp DESC LIMIT 10;`, (err, rows) => {
         let embed = new MessageEmbed()
-            .setTitle('[ 랭킹 Top10 ]')
+            .setTitle('[ XP - 랭킹 Top10 ]')
             .setTimestamp()
+            .setThumbnail(message.guild.iconURL())
+            .setFooter(message.guild.name)
 
         if (rows.length === 0) {
             embed

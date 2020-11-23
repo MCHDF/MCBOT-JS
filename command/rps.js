@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { promptMessage } = require('../function.js');
+const { promptMessage } = require('../config/function.js');
 const chooseArr = ["🖐", "✌", "✊"]
 const usedCommand = new Set();
 module.exports = {
