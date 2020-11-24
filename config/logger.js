@@ -32,7 +32,7 @@ const logger = winston.createLogger({
             dirname: logDir,
             filename: `MCBOT_%DATE%.log`,
             maxFiles: 30,
-            zippedArchive: true
+            zippedArchive: false
         })
     ],
     exceptionHandlers: [
@@ -42,7 +42,7 @@ const logger = winston.createLogger({
             dirname: logDir,
             filename: `MCBOT_ex_%DATE%.log`,
             maxFiles: 30,
-            zippedArchive: true
+            zippedArchive: false
         })
     ]
 })
