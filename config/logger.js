@@ -28,7 +28,7 @@ const logger = winston.createLogger({
     transports: [
         new winstonDaily({
             level: 'info',
-            datePattern: 'YYYY-MM-DD',
+            datePattern: 'YYYYMMDD',
             dirname: logDir,
             filename: `MCBOT_%DATE%.log`,
             maxFiles: 30,
@@ -38,7 +38,7 @@ const logger = winston.createLogger({
     exceptionHandlers: [
         new winstonDaily({
             level: 'error',
-            datePattern: 'YYYY-MM-DD',
+            datePattern: 'YYYYMMDD',
             dirname: logDir,
             filename: `MCBOT_ex_%DATE%.log`,
             maxFiles: 30,
