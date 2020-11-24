@@ -152,7 +152,7 @@ bot.on('message', async message => {
                 return;
             } else {
                 message.delete();
-                message.reply("(이쁜말)");
+                return message.reply("(이쁜말)");
             }
         }
     });
