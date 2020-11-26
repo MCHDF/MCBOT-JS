@@ -47,4 +47,4 @@ Copyright © 2020 [MCHDF](https://github.com/MCHDF).<br />
 This project is [MIT](https://github.com/MCHDF/MCBOT/blob/master/LICENSE) licensed.
 
 ***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+_이 README는 [readme-md-generator](https://github.com/kefranabg/readme-md-generator)로 생성되었습니다._
