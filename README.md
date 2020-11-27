@@ -10,6 +10,12 @@
   <a href="https://github.com/MCHDF/MCBOT/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/MCHDF/MCBOT" />
   </a>
+  <a href="https://img.shields.io/github/last-commit/MCHDF/MCBOT?style=flat-square" target="_blank">
+    <img alt="Last Commit" src="https://img.shields.io/github/last-commit/MCHDF/MCBOT?style=flat-square.svg">
+  </a>
+    <a href="https://img.shields.io/github/languages/top/MCHDF/MCBOT?color=yellow&style=flat-square" target="_blank">
+    <img alt="Top Lang" src="https://img.shields.io/github/languages/top/MCHDF/MCBOT?color=yellow&style=flat-square.svg">
+  </a>
 </p>
 
 ### 🏠 [Homepage](https://github.com/MCHDF/MCBOT#readme)
