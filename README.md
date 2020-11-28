@@ -60,13 +60,6 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 ### 🛠 사용 기술
 
 - discord js : v12.5.0
-- Language : JavaScript
-- npm : v6.14.9
-- Node.js : v12.19.0
-- forever : v3.0.0
-- IDE : VSCode
-- SQL : 10.3.25-MariaDB-0+deb10u1 Raspbian 10
-
 
 ### 🎶 Music
 [![MCHDF's Repo](https://github-readme-stats.vercel.app/api/pin?username=MCHDF&repo=MCMusic&title_color=fff&icon_color=f9f9f9&text_color=9f9f9f&bg_color=151515)](https://github.com/MCHDF/MCMusic)
