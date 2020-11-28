@@ -57,10 +57,6 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
   * Storage : Sandisk micro SDHC CLASS10 UHS-I Ultra 80MB/s
   * OS : Rasbian Pi OS
 
-### 🛠 사용 기술
-
-- discord js : v12.5.0
-
 ### 🎶 Music
 [![MCHDF's Repo](https://github-readme-stats.vercel.app/api/pin?username=MCHDF&repo=MCMusic&title_color=fff&icon_color=f9f9f9&text_color=9f9f9f&bg_color=151515)](https://github.com/MCHDF/MCMusic)
 
