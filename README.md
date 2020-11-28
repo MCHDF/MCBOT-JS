@@ -36,7 +36,7 @@ npm run start
 
 👤 **MCHDF**
 
-* Website: mchdfpi.kro.kr
+* Website: http://mchdfpi.kro.kr
 * Github: [@MCHDF](https://github.com/MCHDF)
 
 ## 설명
@@ -75,6 +75,11 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 
 - 기본적인 명령어는 ``!help`` 명령어를 통해 확인 할 수 있습니다!
 - 봇이 포함된 서버마다 접두사가 다를 경우, ``MCprefix``를 쳐서 확인하실 수 있습니다.
+- 접두사를 커스터마이징하실 경우, 관리자 권한을 가지고있으셔야합니다!
+```
+!prefix <바꿀 접두사>
+!prefix 초기화
+```
 - 봇 초대 : [Here!](https://discord.com/oauth2/authorize?client_id=706171196701540384&scope=bot)
 
 ## ✨ Show your support
