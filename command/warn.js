@@ -5,30 +5,31 @@ module.exports = {
         //     return; // 일단 이건 상황보고 결정하는걸로
         // }
         if (!args[0]) {
-            if(!message.member.hasPermission(["ADMINISTRATOR"])) {
-                let embed = new MessageEmbed()
+            let embed = new MessageEmbed()
                 .setTitle("**명령어 도움말**")
                 .setColor("#FFE4E4")
                 .setAuthor("MCBOT", "https://i.imgur.com/Togof5u.png")
                 .setThumbnail("https://i.imgur.com/Togof5u.png")
                 .setDescription('모든 명령어는 ' + prefix + ' 를 붙여 사용합니다.')
                 .setFooter(`Request by ${message.author.tag} • 문의 : MCHDF#9999`)
-                .addField("경고 보기", "```자신의 경고 상황을 표시합니다!\n사용법 : " + prefix + "경고 보기```")
-                return message.channel.send(embed);
+            if (!message.member.hasPermission(["ADMINISTRATOR"])) {
+                embed
+                    .addField("경고 보기", "```자신의 경고 상황을 표시합니다!\n사용법 : " + prefix + "경고 보기```")
+                    message.fetch(message.id).then(m => {
+                        m.react("⚖");
+                    });
+                return message.author.send(embed);
             } else {
-                let embed = new MessageEmbed()
-                .setTitle("**명령어 도움말**")
-                .setColor("#FFE4E4")
-                .setAuthor("MCBOT", "https://i.imgur.com/Togof5u.png")
-                .setThumbnail("https://i.imgur.com/Togof5u.png")
-                .setDescription('모든 명령어는 ' + prefix + ' 를 붙여 사용합니다.')
-                .setFooter(`Request by ${message.author.tag} • 문의 : MCHDF#9999`)
-                .addField("경고 보기", "```자신의 경고 상황을 표시합니다!\n사용법 : " + prefix + "경고 보기```")
-                .addField('\u200B', '**운영자 전용 명령어**')
-                .addField("경고 추가", "```멘션한 유저에게 경고를 추가시켜요!\n관리자 권한이 필요하고, 이유가 꼭 필요해요!\n사용법 : " + prefix + "경고 추가 <횟수> <멘션> <이유>```")
-                .addField("경고 취소", "```멘션한 유저의 경고를 취소시켜요!\n관리자 권한이 필요해요!\n사용법 : " + prefix + "경고 취소 <횟수> <멘션>```")
-                .addField("경고 유저", "```유저의 경고 상황을 표시합니다!\n관리자 권한이 필요해요!\n사용법 : " + prefix + "경고 유저 <멘션>```");
-                return message.channel.send(embed);
+                embed
+                    .addField("경고 보기", "```자신의 경고 상황을 표시합니다!\n사용법 : " + prefix + "경고 보기```")
+                    .addField('\u200B', '**운영자 전용 명령어**')
+                    .addField("경고 추가", "```멘션한 유저에게 경고를 추가시켜요!\n관리자 권한이 필요하고, 이유가 꼭 필요해요!\n사용법 : " + prefix + "경고 추가 <횟수> <멘션> <이유>```")
+                    .addField("경고 취소", "```멘션한 유저의 경고를 취소시켜요!\n관리자 권한이 필요해요!\n사용법 : " + prefix + "경고 취소 <횟수> <멘션>```")
+                    .addField("경고 유저", "```유저의 경고 상황을 표시합니다!\n관리자 권한이 필요해요!\n사용법 : " + prefix + "경고 유저 <멘션>```");
+                    message.fetch(message.id).then(m => {
+                        m.react("⚖");
+                    });
+                return message.author.send(embed);
             }
         }
         if (args[0] === '보기') {
@@ -74,7 +75,7 @@ module.exports = {
                 return message.channel.send(":loudspeaker:  유저를 멘션해주세요!").then(m => m.delete({ timeout: 3000 }));
             }
             if (isNaN(args[1]) || parseInt(args[1]) <= 0) {
-                return message.reply(":exclamation: 취소할 경고 횟수를 입력해주세요!").then(m => m.delete({ timeout: 3000 }));
+                return message.reply(":exclamation: 추가할 경고 횟수를 입력해주세요!").then(m => m.delete({ timeout: 3000 }));
             }
             let countWarn;
             if (parseInt(args[1]) > 100) {
