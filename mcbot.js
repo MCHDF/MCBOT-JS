@@ -5,7 +5,7 @@ const bot = new Discord.Client();
 const Badwords = require("./jsons/fiterWords.json");
 const log = require('./config/logger.js');
 require('dotenv').config();
-
+//풀리퀘 테스트
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 
