@@ -6,6 +6,12 @@ const Badwords = require("./jsons/fiterWords.json");
 const log = require('./config/logger.js');
 require('dotenv').config();
 
+var StatsD = require('hot-shots');
+var dogstatsd = new StatsD();
+
+// Increment a counter.
+dogstatsd.increment('mcbot.use')
+
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 
@@ -28,7 +34,7 @@ fs.readdir("./command/", (err, files) => {
     });
 });
 
-var con = mysql.createConnection({
+const con = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
@@ -129,6 +135,7 @@ bot.on('message', async message => {
         }
     });
 
+    // 욕설 필터링
     for (var i in filterwords) {
         if (message.content.toLowerCase().includes(filterwords[i].toLowerCase())) {
             foundText = true;
