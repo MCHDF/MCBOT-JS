@@ -71,7 +71,7 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 ```
 - 봇 초대 : [Here!](https://discord.com/oauth2/authorize?client_id=706171196701540384&scope=bot)
 
-## ✨ Show your support
+## ✨ Star!
 
 제 레포지토리가 도움이 되셨다면 ⭐️ 을 눌러주세요!
 
