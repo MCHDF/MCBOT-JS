@@ -44,7 +44,7 @@ module.exports = {
 
 module.exports.help = {
     name: "love",
-    aliases: [''],
+    aliases: ['Love','ㅣㅐㅍㄷ'],
     category: "",
     description: ""
 }
