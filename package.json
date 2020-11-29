@@ -16,6 +16,7 @@
     "dateformat": "^3.0.3",
     "discord.js": "^12.5.0",
     "dotenv": "^8.2.0",
+    "hot-shots": "^8.2.0",
     "join": "^3.0.0",
     "minecraft-server-util": "^1.4.3",
     "moment": "^2.29.1",
