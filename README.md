@@ -42,10 +42,6 @@ npm run start
 ## 설명
 Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니다!
 
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
 ### 🖥 봇 서버 시스템 사양
 흔히 보는 사양을 위주로 작성하였습니다.
 
