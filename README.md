@@ -42,37 +42,10 @@ npm run start
 ## 설명
 Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니다!
 
-### 🏠 [Homepage](https://github.com/MCHDF/MCBOT#readme)
-
-## Install
-
-<<<<<<< HEAD
-```sh
-npm install
-```
-
-## Usage
-
-```sh
-npm run start
-```
-
-## Author
-
-👤 **MCHDF**
-
-* Website: mchdfpi.kro.kr
-* Github: [@MCHDF](https://github.com/MCHDF)
-
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/MCHDF/MCBOT/issues). You can also take a look at the [contributing guide](https://github.com/MCHDF/MCBOT/blob/master/CONTRIBUTING.md).
-
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
-=======
 ### 🖥 봇 서버 시스템 사양
 흔히 보는 사양을 위주로 작성하였습니다.
 
@@ -102,15 +75,12 @@ Give a ⭐️ if this project helped you!
 
 제 레포지토리가 도움이 되셨다면 ⭐️ 을 눌러주세요!
 
->>>>>>> 1a5dad2f291480e7d8f447a6cb105fb87b14abc0
 ## 📝 License
 
 Copyright © 2020 [MCHDF](https://github.com/MCHDF).<br />
 This project is [MIT](https://github.com/MCHDF/MCBOT/blob/master/LICENSE) licensed.
 
 ***
-<<<<<<< HEAD
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
-=======
+
 _이 README는 [readme-md-generator](https://github.com/kefranabg/readme-md-generator)로 생성되었으며, 일부 자체 편집하였습니다._
->>>>>>> 1a5dad2f291480e7d8f447a6cb105fb87b14abc0
+
