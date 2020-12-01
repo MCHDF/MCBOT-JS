@@ -78,5 +78,5 @@ This project is [MIT](https://github.com/MCHDF/MCBOT/blob/master/LICENSE) licens
 
 ***
 
-_이 README는 [readme-md-generator](https://github.com/kefranabg/readme-md-generator)로 생성되었으며, 일부 자체 편집하였습니다._
+_이 README는 [readme-md-generator](https://github.com/kefranabg/readme-md-generator)로 생성되었으며, 일부 편집하였습니다._
 
