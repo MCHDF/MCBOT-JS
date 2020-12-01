@@ -18,8 +18,6 @@
   </a>
 </p>
 
-### 🏠 [Homepage](https://github.com/MCHDF/MCBOT#readme)
-
 ## Install
 
 ```sh
@@ -75,8 +73,4 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 
 Copyright © 2020 [MCHDF](https://github.com/MCHDF).<br />
 This project is [MIT](https://github.com/MCHDF/MCBOT/blob/master/LICENSE) licensed.
-
-***
-
-_이 README는 [readme-md-generator](https://github.com/kefranabg/readme-md-generator)로 생성되었으며, 일부 편집하였습니다._
 
