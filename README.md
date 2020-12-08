@@ -63,6 +63,8 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 !prefix <바꿀 접두사>
 !prefix 초기화
 ```
+더 자세한 정보는 아래의 링크를 이용해주세요!
+- [Wiki](https://www.notion.so/MCBOT-4105c7e176a1424fbd1398fea7d084e8)
 - 봇 초대 : [Here!](https://discord.com/oauth2/authorize?client_id=706171196701540384&scope=bot)
 
 ## ✨ Star!
