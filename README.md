@@ -18,8 +18,6 @@
   </a>
 </p>
 
-### 🏠 [Homepage](https://github.com/MCHDF/MCBOT#readme)
-
 ## Install
 
 ```sh
@@ -65,6 +63,8 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 !prefix <바꿀 접두사>
 !prefix 초기화
 ```
+더 자세한 정보는 아래의 링크를 이용해주세요!
+- [Notion](https://www.notion.so/MCBOT-4105c7e176a1424fbd1398fea7d084e8) (아직 완성되지 않았어요! 내용이 부족하더라도 이해해주세요....!)
 - 봇 초대 : [Here!](https://discord.com/oauth2/authorize?client_id=706171196701540384&scope=bot)
 
 ## ✨ Star!
@@ -75,8 +75,4 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 
 Copyright © 2020 [MCHDF](https://github.com/MCHDF).<br />
 This project is [MIT](https://github.com/MCHDF/MCBOT/blob/master/LICENSE) licensed.
-
-***
-
-_이 README는 [readme-md-generator](https://github.com/kefranabg/readme-md-generator)로 생성되었으며, 일부 자체 편집하였습니다._
 
