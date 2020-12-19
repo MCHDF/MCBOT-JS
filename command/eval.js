@@ -1,36 +1,61 @@
-const { MessageEmbed } = require("discord.js");
-const beautify = require('beautify');
+const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { inspect } = require("util");
+const { Type } = require('@extreme_hero/deeptype')
 
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
         if (!args[0]) {
             return message.channel.send('어.....네?');
         }
+        let code = args.join(' ');
+        let evaled;
+        code = code.replace(/[""]/g, '"').replace(/['']/g, "'");
         try {
-            if (args.join(' ').toLowerCase().includes("token")) {
-                return;
+            const start = process.hrtime();
+            evaled = eval(code);
+            if (evaled instanceof Promise) {
+                evaled = await evaled;
             }
-
-            const toEval = args.join(' ');
-            const evaluated = eval(toEval);
-
-            let embed = new MessageEmbed()
+            const stop = process.hrtime(start);
+            let OUT = clean(inspect(evaled, { depth: 0 }));
+            let type = new Type(evaled).is;
+            let Time = ((stop[0] * 1e9) + stop[1]) / 1e6;
+            let respone = [
+                '**OUT**', `\`\`\`js\n ${OUT}\n\`\`\``,
+                '**Type**', `\`\`\`ts\n${type}\n\`\`\``,
+                '**Time**', `\`\`\`${Time}ms\`\`\``
+            ];
+            const res = respone.join('\n');
+            if (res.length < 2000) {
+                let evalPrint = new MessageEmbed()
+                .setTitle('EVAL')
+                .addField('**OUT**', `\`\`\`js\n ${OUT}\n\`\`\``)
+                .addField('**Type**', `\`\`\`ts\n${type}\n\`\`\``)
+                .addField('**Time**', `\`\`\`${Time}ms\`\`\``)
                 .setColor('GREEN')
-                .setFooter(bot.user.username, bot.user.displayAvatarURL())
-                .addField('구문', `\`\`\`js\n${beautify(args.join(' '), { format: "js" })}\n\`\`\``)
-                .addField('결과', evaluated)
-                .addField('결과 유형', typeof (evaluated))
-
-            return message.channel.send(embed);
+                .setTimestamp()
+                await message.channel.send(evalPrint);
+            } else {
+                const output = new MessageAttachment(Buffer.from(res), 'output.txt');
+                await message.channel.send(output);
+            }
         } catch (e) {
-            return message.channel.send(`\`\`\`${e}\`\`\``)
+            return message.channel.send(`\`\`\`x1\n${clean(e)}\n\`\`\``);
         }
-
+        function clean(text) {
+            if (typeof text === 'string') {
+                text = text
+                    .replace(/`/g, `\`${String.fromCharCode(8203)}`)
+                    .replace(/@/g, `@${String.fromCharCode(8203)}`)
+                    .replace(new RegExp(bot.token, 'gi'), '****');
+            }
+            return text;
+        }
     }
 }
 
 module.exports.help = {
-    name: "e",
+    name: "eval",
     aliases: [''],
     category: "",
     description: ""

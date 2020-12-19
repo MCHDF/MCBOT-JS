@@ -4,7 +4,7 @@ module.exports = {
         if(message.author.id != '468781931182555136') {
             message.channel.send('ACCESS_DENIED');
         } else {
-            con.query(`쿼리 내용`);
+            con.query(`쿼리내용`);
             return message.channel.send('완료')
         }
     }

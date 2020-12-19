@@ -3,6 +3,9 @@ const { MessageAttachment, MessageEmbed } = require('discord.js');
 const { join } = require('path');
 
 module.exports.run = async (bot, message, args, con) => {
+    // if(message.guild.id === '534586842079821824') {
+    //     return message.channel.send('해당 서버는 XP기능이 제한되어있습니다. 사용을 자제해주세요.');
+    // }
 
     const member = message.mentions.users.first() || message.author;
     

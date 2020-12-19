@@ -6,7 +6,7 @@ module.exports = {
         let user = message.mentions.users.first() || message.author;
 
         if (user.presence.status === "dnd") user.presence.status = "방해 금지"
-        if (user.presence.status === "idle") user.presence.status = "자리 비움"
+        if (user.presence.status === "idle") user.presence.status = "AFK"
         if (user.presence.status === "offline") user.presence.status = "오프라인"
         if (user.presence.status === "online") user.presence.status = "온라인"
 
@@ -22,7 +22,7 @@ module.exports = {
             .setColor('#ffc4c4')
             .setTimestamp()
             .setThumbnail(avatar)
-            .setFooter(`Request By ${message.author.tag}`)
+            .setFooter(message.guild.name)
             .addField('[ 유저 이름 ]', user.username, true)
             .addField('[ 유저 태그 ]', user.tag, true)
             .addField('[ 유저 ID ]', user.id, true)
@@ -35,7 +35,7 @@ module.exports = {
 
 module.exports.help = {
     name: "유저",
-    aliases: ['정보', '유저'],
+    aliases: ['user', '유저'],
     category: "Information",
     description: "Information for guild Members"
 }

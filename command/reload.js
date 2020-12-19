@@ -5,7 +5,7 @@ module.exports = {
             message.channel.send('ACCESS_DENIED');
         } else {
             if(args[0] === 'bot') {
-                message.channel.send('봇을 재시작합니다.');
+                await message.channel.send('봇을 재시작합니다.');
                 process.exit();
             }
             if(!args[0]){
