@@ -296,4 +296,4 @@ bot.on('guildMemberUpdate', member => {
     con.query(`UPDATE warnUser SET name = '${member.user.username}' WHERE id = '${member.id}';`);
 });
 
-bot.login("Nzg5MTIzMjA1Nzg4MDc0MDM1.X9teQQ.pb98N-ZBYnCRlCbZWhiPmF90l_4");
+bot.login(process.env.MCBOT_TOKEN);
