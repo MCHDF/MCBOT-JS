@@ -103,10 +103,5 @@ dist
 # TernJS port file
 .tern-port
 
-.json
-
-imgs/
-fonts/
-jsons/
 README_imgs/
 test.js
