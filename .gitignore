@@ -103,5 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
+prefixSet.json
 README_imgs/
 test.js
