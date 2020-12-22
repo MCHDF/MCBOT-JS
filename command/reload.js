@@ -1,7 +1,7 @@
 
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
-        if(message.author.id != '468781931182555136') {
+        if(message.author.id != (await bot.fetchApplication()).owner.id) {
             message.channel.send('ACCESS_DENIED');
         } else {
             if(args[0] === 'bot') {
