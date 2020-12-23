@@ -3,9 +3,8 @@ const usedCommand = new Set();
 
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
-
         if (args[0] === '초기화') {
-            if (message.author.id != '468781931182555136') {
+            if (message.author.id != (await bot.fetchApplication()).owner.id) {
                 return message.channel.send('엑세스 거부');
             } else {
                 usedCommand.clear();
