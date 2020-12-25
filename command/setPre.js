@@ -2,7 +2,7 @@ const fs = require('fs');
 
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
-        if(!message.author.id ===(await bot.fetchApplication()).owner.id){
+        if(message.author.id != '468781931182555136'){
             if (!message.member.hasPermission("ADMINISTRATOR")) {
                 return message.channel.send(':octagonal_sign: 권한이 없어요!');
             }

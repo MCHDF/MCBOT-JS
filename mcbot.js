@@ -23,8 +23,8 @@ fs.readdir("./command/", (err, files) => {
         console.log(`[ ${f} ] load Complete`);
         bot.commands.set(props.help.name, props);
         props.help.aliases.forEach(alias => {
-            bot.aliases.set(alias, props.help.name)
-        })
+            bot.aliases.set(alias, props.help.name);
+        });
     });
 });
 
@@ -52,12 +52,7 @@ bot.on('ready', () => {
     console.log(`│ 봇 ${bot.user.username}이 작동 시작합니다!│`);
     console.log(`└────────────────────────────┘`);
     let statuses = [
-        `!help`,
-        `문의 : MCHDF#9999`,
-        `길드 : ${bot.guilds.cache.size}개`,
-        `유저 : ${bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}명`,
-        `채널 : ${bot.channels.cache.size}개`,
-        `MCprefix로 서버별 접두사 확인`
+        `현재 점검중입니다. 사용을 금지합니다!`
     ]
 
     setInterval(function () {
@@ -90,6 +85,7 @@ bot.on('guildDelete', async (guild) => {
 bot.on('message', async message => {
     if (message.author.bot) return;
     if (message.channel.type === 'dm') return;
+
 
     let prefixSet = JSON.parse(fs.readFileSync('./jsons/prefixSet.json', 'utf-8'));
 
@@ -188,7 +184,9 @@ bot.on('message', async message => {
         return message.channel.send(`:bulb: 현재 서버의 접두사는 \`${prefix}\` 입니다!`);
     }
     if (message.content === prefix) {
-        return;
+        if(!message.author.id === '468781931182555136') {
+            return message.channel.send("현재 봇이 점검중에 있습니다. 고쳐질때까지 기다려주세요...")
+        }
     }
 
     if (!message.content.startsWith(prefix)) return;

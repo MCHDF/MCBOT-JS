@@ -3,6 +3,7 @@ module.exports = {
     run: async (bot, message, args, con, prefix) => {
         let embed = new MessageEmbed()
             .setTitle("**명령어 도움말**")
+            .setURL('https://bit.ly/37DldKf')
             .setColor("#FFE4E4")
             .setAuthor("MCBOT", "https://i.imgur.com/Togof5u.png")
             .setThumbnail("https://i.imgur.com/Togof5u.png")
