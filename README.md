@@ -2,10 +2,10 @@
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-ff69b4?style=for-the-badge&logo=appveyor.svg?cacheSeconds=2592000" />
   <a href="https://github.com/MCHDF/MCBOT#readme" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen?style=for-the-badge&logo=appveyor.svg" />
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen?style=for-the-badge&logo=appveyor" />
   </a>
   <a href="https://github.com/MCHDF/MCBOT/graphs/commit-activity" target="_blank">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green?style=for-the-badge&logo=appveyor.svg" />
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green?style=for-the-badge&logo=appveyor" />
   </a>
   <a href="https://github.com/MCHDF/MCBOT/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/MCHDF/MCBOT?style=for-the-badge&logo=appveyor" />
@@ -14,7 +14,10 @@
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/MCHDF/MCBOT?style=for-the-badge&logo=appveyor">
   </a>
     <a href="https://img.shields.io/github/languages/top/MCHDF/MCBOT?color=yellow&style=flat-square" target="_blank">
-    <img alt="Top Lang" src="https://img.shields.io/github/languages/top/MCHDF/MCBOT?color=yellow&style=for-the-badge&logo=appveyor.svg">
+    <img alt="Top Lang" src="https://img.shields.io/github/languages/top/MCHDF/MCBOT?color=yellow&style=for-the-badge&logo=appveyor">
+  </a>
+  <a href="https://img.shields.io/codefactor/grade/github/MCHDF/MCBOT?style=for-the-badge" target="_blank">
+    <img alt="CodeFactor" src="https://img.shields.io/codefactor/grade/github/MCHDF/MCBOT?style=for-the-badge&logo=appveyor">
   </a>
 </p>
 
