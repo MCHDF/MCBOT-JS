@@ -4,6 +4,7 @@
   "description": "MCHDF's DIscord js Bot",
   "main": "mcbot.js",
   "dependencies": {
+    "@extreme_hero/deeptype": "^1.0.1",
     "app-root-path": "^3.0.0",
     "bcryptjs": "^2.4.3",
     "beautify": "^0.0.8",

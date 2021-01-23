@@ -5,7 +5,7 @@ module.exports = {
         if(message.deletable) {
             message.delete();
         }
-        if(message.author.id != '468781931182555136') {
+        if(!message.author.id === (await bot.fetchApplication()).owner.id) {
             return message.channel.send(':no_mouth:')
         }
         if(args.length < 1) {
