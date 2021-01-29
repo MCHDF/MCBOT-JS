@@ -108,8 +108,8 @@ module.exports.run = async (bot, message, args, con) => {
         }
 
         ctx.font = "50px NanumBarunGothic";
-        ctx.fillText('Lv ', 308, 180);
-        ctx.fillText(lvl, 363, 180);
+        ctx.fillText('Lv. ', 308, 180);
+        ctx.fillText(lvl, 375, 180);
 
         ctx.arc(170, 160, 120, 0, Math.PI * 2, true);
         ctx.linewidth = 6;

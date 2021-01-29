@@ -8,7 +8,7 @@ module.exports = {
                     return message.channel.send('유저분은 현재 돈을 가지고있지 않습니다.\n:bulb: \`!돈 기본지급\`');
                 }
                 let money = rows[0].money;
-                message.channel.send(`돈 : ${money.toLocaleString()}`);
+                message.channel.send(`${message.author.username}님의 돈 : ${money.toLocaleString()}`);
             })
         } else if (args[0] === '기본지급') {
             con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}';`, (err, rows) => {
