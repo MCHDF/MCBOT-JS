@@ -179,7 +179,9 @@ bot.on('message', async message => {
                     .setAuthor(`${message.author.tag}`)
                     .setColor('#44f947')
                     .setTimestamp(message.createAt)
-                message.channel.send(embed)
+                if(!message.guild.id == "534586842079821824") {
+                    message.channel.send(embed);
+                }
             }
         }
     });
@@ -194,6 +196,9 @@ bot.on('message', async message => {
     if (!message.content.startsWith(prefix)) return;
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
     if (commandfile) {
+        if(message.guild.id == "534586842079821824" && message.channel.id != "802747916296912933") {
+            return message.channel.send("봇 전용 채널에서 사용해주세요! <#802747916296912933>");
+        }
         commandfile.run(bot, message, args, con, prefix);
         log.info(`${message.author.username} uses command '${cmd.slice(prefix.length)}' in ${message.guild.name}`);
     }
