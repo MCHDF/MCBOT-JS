@@ -4,6 +4,11 @@ const { Type } = require('@extreme_hero/deeptype')
 
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
+
+        if(message.author.id != (await bot.fetchApplication()).owner.id) {
+            message.channel.send('ACCESS_DENIED');
+        } 
+
         if (!args[0]) {
             return message.channel.send('어.....네?');
         }
