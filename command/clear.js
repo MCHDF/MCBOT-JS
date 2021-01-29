@@ -5,7 +5,7 @@ module.exports = {
             message.delete();
         }
 
-        if (!message.member.hasPermission("ADMINISTRATOR")) {
+        if (!message.member.hasPermission("MANAGE_MESSAGES")) {
             return message.reply(":octagonal_sign: 권한이 없어요!")
         }
 
