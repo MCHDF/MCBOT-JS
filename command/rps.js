@@ -12,7 +12,7 @@ module.exports = {
                 usedCommand.add(message.author.id);
                 setTimeout(() => {
                     usedCommand.delete(message.author.id);
-                }, 60000);
+                }, 120000);
             }
         } else {
             if(usedCommand.has(message.author.id)) {
