@@ -9,7 +9,7 @@
     "bcryptjs": "^2.4.3",
     "beautify": "^0.0.8",
     "canvas": "^2.6.1",
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "^1.0.0-rc.5",
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
     "discord.js": "^12.5.1",

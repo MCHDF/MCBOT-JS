@@ -60,10 +60,17 @@ bot.on('ready', () => {
         `MCprefix로 서버별 접두사 확인`
     ]
 
+    let value = 0;
+
     setInterval(function () {
-        let status = statuses[Math.floor(Math.random() * statuses.length)];
+        let status = statuses[value];
+        value++;
+        if(value >= statuses.length) {
+            value = 0;
+        }
         bot.user.setActivity(status, { type: "PLAYING" });
     }, 3000);
+    
 });
 
 bot.on('guildCreate', (guild) => {
@@ -88,6 +95,7 @@ bot.on('guildDelete', async (guild) => {
 })
 
 bot.on('message', async message => {
+
     if (message.author.bot) return;
     if (message.channel.type === 'dm') return;
 
@@ -192,17 +200,21 @@ bot.on('message', async message => {
     if (message.content === prefix) {
         return;
     }
+    if (!message.content.startsWith(prefix)) {
+        return;
+    }
 
-    if (!message.content.startsWith(prefix)) return;
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
     if (commandfile) {
-        if(message.guild.id == "534586842079821824" && message.channel.id != "802747916296912933") {
-            return message.channel.send("봇 전용 채널에서 사용해주세요! <#802747916296912933>");
+        if(message.author.id != (await bot.fetchApplication()).owner.id) {
+            if(message.guild.id == "534586842079821824" && message.channel.id != "802747916296912933") {
+                message.delete();
+                return message.channel.send("봇 전용 채널에서 사용해주세요! <#802747916296912933> <#534586842079821824>");
+            }
         }
         commandfile.run(bot, message, args, con, prefix);
         log.info(`${message.author.username} uses command '${cmd.slice(prefix.length)}' in ${message.guild.name}`);
     }
-
 });
 
 bot.on('guildMemberAdd', member => {
@@ -295,9 +307,7 @@ bot.on('guildMemberRemove', member => {
 });
 
 bot.on('guildMemberUpdate', member => {
-    con.query(`UPDATE xp Set name = '${member.user.username}' WHERE id = '${member.id}';`, (err) => {
-        if(err) member.send(`유저분의 정보를 업데이트 하는데 문제가 생겼어요! 아래의 내용을 MCHDF#9999로 알려주세요!\n\`\`\`js\n${err}\`\`\``);
-    });
+    con.query(`UPDATE xp Set name = '${member.user.username}' WHERE id = '${member.id}';`);
     con.query(`UPDATE warnUser SET name = '${member.user.username}' WHERE id = '${member.id}';`);
 });
 

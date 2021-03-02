@@ -3,31 +3,21 @@ const usedCommand = new Set();
 
 module.exports = {
     run: async (bot, message, args, con) => {
-        if(message.guild.id === '703807451325268088') {
-            if (usedCommand.has(message.author.id)) {
-                return message.reply(`:arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!`)
-            } else {
-                usedCommand.add(message.author.id);
-                setTimeout(() => {
-                    usedCommand.delete(message.author.id);
-                }, 300000);
-            }
+
+        if (usedCommand.has(message.author.id)) {
+            return message.reply(`:arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!`)
         } else {
-            if (usedCommand.has(message.author.id)) {
-                return message.reply(`:arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!`)
-            } else {
-                usedCommand.add(message.author.id);
-                setTimeout(() => {
-                    usedCommand.delete(message.author.id);
-                }, 10000);
-            }
+            usedCommand.add(message.author.id);
+            setTimeout(() => {
+                usedCommand.delete(message.author.id);
+            }, 10000);
         }
 
         let user = message.author;
 
         const love = Math.random() * 100;
         const loveindex = Math.floor(love / 10);
-        if(loveindex > 100) {
+        if (loveindex > 100) {
             loveindex = 100;
         }
         const loveLevel = "💖".repeat(loveindex) + "💔".repeat(10 - loveindex);
@@ -44,7 +34,7 @@ module.exports = {
 
 module.exports.help = {
     name: "love",
-    aliases: ['Love','ㅣㅐㅍㄷ'],
+    aliases: ['Love', 'ㅣㅐㅍㄷ'],
     category: "",
     description: ""
 }

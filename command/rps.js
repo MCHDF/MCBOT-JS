@@ -5,16 +5,7 @@ const usedCommand = new Set();
 module.exports = {
     run: async (bot, message, args, con) => {
         message.delete();
-        if(message.guild.id === '534586842079821824') {
-            if(usedCommand.has(message.author.id)) {
-                return message.reply(':arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!')
-            } else {
-                usedCommand.add(message.author.id);
-                setTimeout(() => {
-                    usedCommand.delete(message.author.id);
-                }, 120000);
-            }
-        } else {
+        if(message.guild.id != '534586842079821824') {
             if(usedCommand.has(message.author.id)) {
                 return message.reply(':arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!')
             } else {
