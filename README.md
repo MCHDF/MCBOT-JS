@@ -21,16 +21,12 @@
   </a>
 </p>
 
-## Install
 
-```sh
-npm install
+## 주의
+
 ```
-
-## Usage
-
-```sh
-npm run start
+MCBOT은 모든 코드가 개인 개발 환경에 맞춰져있습니다.
+이 레포는 참고용으로만 이용해주세요!
 ```
 
 ## Author
