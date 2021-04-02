@@ -27,37 +27,6 @@ module.exports = {
                     return message.channel.send('유저분은 이미 기본지원금을 받으셨습니다.');
                 }
             })
-        } else if (args[0] === '랭킹'){
-            con.query(`SELECT * FROM Economy ORDER BY money DESC, name ASC LIMIT 10;`, (err, rows) => {
-                let embed = new MessageEmbed()
-                    .setTitle('[ Economy 랭킹 Top10 ]')
-                    .setTimestamp()
-        
-                if (rows.length === 0) {
-                    embed
-                        .setColor('RED')
-                        .addField('데이터를 불러오지 못했거나, 오류가 생긴것 같아요!');
-                } else if (rows.length < 10) {
-                    embed
-                        .setColor('GREEN')
-                    for (i = 0; i < rows.length; i++) {
-                        let money = rows[i].money;
-                        let name = rows[i].name;
-                        embed
-                            .addField(`**[ ${i + 1}위 ] \`${name}\`**`, `[ 잔액 ] : ${money.toLocaleString()}`, true)
-                    }
-                } else {
-                    embed
-                        .setColor('GREEN')
-                    for (i = 0; i < 10; i++) {
-                        let money = rows[i].money;
-                        let name = rows[i].name;
-                        embed
-                            .addField(`**[ ${i + 1}위 ] \`${name}\`**`, `[ 잔액 ] : ${money.toLocaleString()}`, true)
-                    }
-                }
-                message.channel.send(embed);
-            });
         } else if (args[0] === '추가') {
             var user = message.mentions.users.first();
             if (message.author.id != '468781931182555136') {
