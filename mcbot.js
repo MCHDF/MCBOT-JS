@@ -5,6 +5,8 @@ const bot = new Discord.Client();
 const Badwords = require("./jsons/fiterWords.json");
 const log = require('./config/logger.js');
 require('dotenv').config();
+var StatsD = require('hot-shots');
+var dogstatsd = new StatsD();
 
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
@@ -65,12 +67,12 @@ bot.on('ready', () => {
     setInterval(function () {
         let status = statuses[value];
         value++;
-        if(value >= statuses.length) {
+        if (value >= statuses.length) {
             value = 0;
         }
         bot.user.setActivity(status, { type: "PLAYING" });
     }, 3000);
-    
+
 });
 
 bot.on('guildCreate', (guild) => {
@@ -114,6 +116,7 @@ bot.on('message', async message => {
     let args = messageArray.slice(1);
 
     let filterwords = Badwords.BADWORDS;
+    let zbcFilter = Badwords.BADWORDS_zbc;
     let messageURL = Badwords.messageURL;
     let foundText = false;
 
@@ -143,6 +146,7 @@ bot.on('message', async message => {
             foundText = true;
         }
     }
+
     for (var k in messageURL) {
         if (message.content.toLowerCase().includes(messageURL[k].toLowerCase())) {
             foundText = false;
@@ -150,21 +154,48 @@ bot.on('message', async message => {
     }
 
     let messagechid = message.channel.id;
-    con.query(`SELECT * FROM Guilds WHERE guildId = '${message.guild.id}';`, (err, rows) => {
-        if (err) throw err;
-        let exceptionCh = rows[0].exceptionCh;
-        if (!exceptionCh) {
-            return;
-        }
-        if (foundText) {
-            if (messagechid === exceptionCh) {
-                return;
-            } else {
-                message.delete();
-                return message.reply("(이쁜말)");
+
+    if (message.guild.id === "534586842079821824") {
+        for (var i in zbcFilter) {
+            if (message.content.toLowerCase().includes(zbcFilter[i].toLowerCase())) {
+                foundText = true;
             }
         }
-    });
+
+        if (foundText) {
+            con.query(`SELECT * FROM Guilds WHERE guildId = '${message.guild.id}';`, (err, rows) => {
+                if (err) throw err;
+                let exceptionCh = rows[0].exceptionCh;
+                if (!exceptionCh) {
+                    return;
+                }
+                if (messagechid === exceptionCh) {
+                    return;
+                } else {
+                    message.delete();
+                    return message.reply("(이쁜말)");
+                }
+            });
+        }
+    } else {
+        if (foundText) {
+            con.query(`SELECT * FROM Guilds WHERE guildId = '${message.guild.id}';`, (err, rows) => {
+                if (err) throw err;
+                let exceptionCh = rows[0].exceptionCh;
+                if (!exceptionCh) {
+                    return;
+                }
+                if (messagechid === exceptionCh) {
+                    return;
+                } else {
+                    message.delete();
+                    return message.reply("(이쁜말)");
+                }
+            });
+        }
+
+    }
+
 
     //xp 시스템
     con.query(`SELECT * FROM xp WHERE guildId = '${message.guild.id}' AND id = '${message.author.id}';`, (err, rows) => {
@@ -187,7 +218,7 @@ bot.on('message', async message => {
                     .setAuthor(`${message.author.tag}`)
                     .setColor('#44f947')
                     .setTimestamp(message.createAt)
-                if(!message.guild.id == "534586842079821824") {
+                if (!message.guild.id == "534586842079821824") {
                     message.channel.send(embed);
                 }
             }
@@ -206,8 +237,10 @@ bot.on('message', async message => {
 
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
     if (commandfile) {
-        if(message.author.id != (await bot.fetchApplication()).owner.id) {
-            if(message.guild.id == "534586842079821824" && message.channel.id != "802747916296912933") {
+        // Increment a counter.
+        dogstatsd.increment('mcbot.use.command');
+        if (message.author.id != (await bot.fetchApplication()).owner.id) {
+            if (message.guild.id == "534586842079821824" && message.channel.id != "802747916296912933") {
                 message.delete();
                 return message.channel.send("봇 전용 채널에서 사용해주세요! <#802747916296912933> <#534586842079821824>");
             }
@@ -307,8 +340,14 @@ bot.on('guildMemberRemove', member => {
 });
 
 bot.on('guildMemberUpdate', member => {
-    con.query(`UPDATE xp Set name = '${member.user.username}' WHERE id = '${member.id}';`);
-    con.query(`UPDATE warnUser SET name = '${member.user.username}' WHERE id = '${member.id}';`);
+    let name = member.user.username
+    if(name.includes("'")) {
+        name.replace("'", "\'")
+    } else if (name.includes('"')) {
+        name.replace('"', '\"')
+    }
+    con.query(`UPDATE xp Set name = "${name}" WHERE id = "${member.id}";`);
+    con.query(`UPDATE warnUser SET name = "${name}" WHERE id = "${member.id}";`);
 });
 
 bot.login(process.env.MCBOT_TOKEN);
