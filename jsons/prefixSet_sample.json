@@ -1,0 +1,8 @@
+{
+    "DISCORD_GUILD_ID_1": {
+        "prefixSet": "!"
+    },
+    "DISCORD_GUILD_ID_2": {
+        "prefixSet": ">"
+    }
+}
