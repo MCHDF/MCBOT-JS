@@ -8,6 +8,7 @@ const swearLog = require('./config/swearLogger');
 require('dotenv').config();
 var StatsD = require('hot-shots');
 var dogstatsd = new StatsD();
+const ZBC = process.env.GUILD_ZBC;
 
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
@@ -171,7 +172,7 @@ bot.on('message', async message => {
         }
     }
 
-    if (message.guild.id === "534586842079821824") {
+    if (message.guild.id === ZBC) {
         for (var i in zbcFilter) {
             if (message.content.toLowerCase().includes(zbcFilter[i].toLowerCase())) {
                 foundText = true;
@@ -228,7 +229,7 @@ bot.on('message', async message => {
                     .setAuthor(`${message.author.tag}`)
                     .setColor('#44f947')
                     .setTimestamp(message.createAt)
-                if (!message.guild.id == "534586842079821824") {
+                if (!message.guild.id == ZBC) {
                     message.channel.send(embed);
                 }
             }
@@ -250,9 +251,9 @@ bot.on('message', async message => {
         // Increment a counter.
         dogstatsd.increment('mcbot.use.command');
         if (message.author.id != (await bot.fetchApplication()).owner.id) {
-            if (message.guild.id == "534586842079821824" && message.channel.id != "802747916296912933") {
+            if (message.guild.id == ZBC && message.channel.id != "802747916296912933") {
                 message.delete();
-                return message.channel.send("봇 전용 채널에서 사용해주세요! <#802747916296912933> <#534586842079821824>");
+                return message.channel.send("봇 전용 채널에서 사용해주세요! <#802747916296912933>");
             }
         }
         commandfile.run(bot, message, args, con, prefix);
