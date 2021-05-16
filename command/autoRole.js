@@ -17,10 +17,10 @@ module.exports = {
                 let autoRole = rows[0].autoRole;
                 let logCh = rows[0].logCh;
                 if (!logCh) {
-                    return message.channel.send(':exclamation:  기능을 사용하기 전에, 로그채널을 먼저 설정해주세요!').then(m => m.delete({ timeout: 3000 }));;
+                    return message.channel.send(':exclamation:  기능을 사용하기 전에, 로그채널을 먼저 설정해주세요!').then(m => m.delete({ timeout: 3000 }));
                 }
                 if (!autoRole) {
-                    return message.channel.send(':exclamation:  자동으로 부여하고있는 역할이 이미 없어요!').then(m => m.delete({ timeout: 5000 }));;
+                    return message.channel.send(':exclamation:  자동으로 부여하고있는 역할이 이미 없어요!').then(m => m.delete({ timeout: 5000 }));
                 } else {
                     let ch = bot.channels.cache.get(`${logCh}`);
                     let ROLE = message.guild.roles.cache.get(`${autoRole}`);
@@ -49,7 +49,7 @@ module.exports = {
                 let autoRole = rows[0].autoRole;
                 let logCh = rows[0].logCh;
                 if (!logCh) {
-                    return message.channel.send(':exclamation: 기능을 사용하기 전에, 로그채널을 먼저 설정해주세요!').then(m => m.delete({ timeout: 3000 }));;
+                    return message.channel.send(':exclamation: 기능을 사용하기 전에, 로그채널을 먼저 설정해주세요!').then(m => m.delete({ timeout: 3000 }));
                 }
                 if (!autoRole) {
                     let ch = bot.channels.cache.get(`${logCh}`);
@@ -61,7 +61,7 @@ module.exports = {
                         .setFooter(`${message.guild.name}`)
                         .addField('[ 역할 ]', `${ROLE.name}`)
                     ch.send(embed);
-                    return message.channel.send(':white_check_mark: 자동부여 역할 설정 완료!').then(m => m.delete({ timeout: 5000 }));;
+                    return message.channel.send(':white_check_mark: 자동부여 역할 설정 완료!').then(m => m.delete({ timeout: 5000 }));
                 } else {
                     let ch = bot.channels.cache.get(`${logCh}`);
                     con.query(`UPDATE Guilds SET autoRole = '${ROLE.id}' WHERE guildId = '${gid}'`);
@@ -72,7 +72,7 @@ module.exports = {
                         .setFooter(`${message.guild.name}`)
                         .addField('[ 역할 ]', `${ROLE.name}`)
                     ch.send(embed);
-                    return message.channel.send(':white_check_mark: 자동부여 역할 업데이트 완료!').then(m => m.delete({ timeout: 5000 }));;
+                    return message.channel.send(':white_check_mark: 자동부여 역할 업데이트 완료!').then(m => m.delete({ timeout: 5000 }));
                 }
             })
         }
