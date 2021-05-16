@@ -109,4 +109,4 @@ test.js
 verification.js
 swearFilterLogs/
 .idea/
-sql.js
+command/sql.js
