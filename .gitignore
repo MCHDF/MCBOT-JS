@@ -106,3 +106,5 @@ dist
 prefixSet.json
 README_imgs/
 test.js
+verification.js
+swearFilterLogs/
