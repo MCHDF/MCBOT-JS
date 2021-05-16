@@ -27,7 +27,7 @@ module.exports = {
 
         message.channel.bulkDelete(deleteAmount, true)
             .then(deleted => message.reply(`:white_check_mark: 메시지 \`${deleted.size}\`개를 삭제했어요!`).then(m => m.delete({ timeout: 3000 })))
-            .catch(err => message.reply(`:exclamation: 앗, 처리 도중에 문제가 생겼어요!`));
+            .catch(err => message.reply(`:exclamation: 앗, 처리 도중에 문제가 생겼어요!\n\`\`\`${err}\`\`\``));
     }
 }
 

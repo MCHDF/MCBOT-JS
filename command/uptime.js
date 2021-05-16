@@ -32,7 +32,7 @@ module.exports = {
             } else {
                 wek = `\`${wek}\`주`
             }
-            return `마지막 실행을 기준으로 ${wek}${day}${hrs}${min}${sec}가동 중이에요! `
+            return `마지막 빌드를 기준으로 ${wek}${day}${hrs}${min}${sec}가동 중이에요! `
         }
         return message.channel.send(duration(bot.uptime))
     }

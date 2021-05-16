@@ -34,7 +34,7 @@ module.exports = {
             }
             if (!user) {
                 var addMoney = parseInt(args[1]);
-                var user = message.author;
+                user = message.author;
             } else {
                 var addMoney = parseInt(args[2]);
             }
@@ -53,14 +53,14 @@ module.exports = {
             }
             if (!user) {
                 var delMoney = parseInt(args[1]);
-                var user = message.author;
+                user = message.author;
             } else {
                 var delMoney = parseInt(args[2]);
             }
             if (args[1] === '전부') {
                 con.query(`SELECT * FROM Economy WHERE userId = '${user.id}'`, (err, rows) => {
                     let money = rows[0].money;
-                    con.query(`UPDATE Economy SET money = ${money - money} WHERE userId = '${user.id}'`);
+                    con.query(`UPDATE Economy SET money = 0 WHERE userId = '${user.id}'`);
                     return message.channel.send(`${money.toLocaleString()}원 제거 완료\n남은 잔액 : ${(money - money).toLocaleString()}`)
                 })
             } else {

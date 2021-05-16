@@ -2,6 +2,17 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     run: async (bot, message, args, con) => {
+
+        if (!args[0]) {
+            let embed = new MessageEmbed()
+            .setTitle("자동역할")
+            .setDescription('서버에 입장하는 유저들에게 역할을 자동으로 부여해주는 명령어입니다.')
+            .setColor('GREEN')
+            .addField(`[ ${prefix}자동역할 지정 <멘션> ]`, "멘션한 역할을 자동으로 부여할 역할로 지정합니다.", true)
+            .addField(`[ ${prefix}자동역할 취소 ]`, "역할의 자동 부여를 중단합니다.", true)
+            return message.channel.send(embed);
+        }
+
         if (args[0] === '취소') {
             
             let gid = message.guild.id;
@@ -35,7 +46,7 @@ module.exports = {
                     return message.channel.send(':white_check_mark: 역할 자동부여 취소가 완료되었어요!').then(m => m.delete({ timeout: 5000 }));;
                 }
             })
-        } else {
+        } else if(args[0]==="지정") {
             let ROLE = message.mentions.roles.first();
             let gid = message.guild.id;
             if (!message.member.hasPermission(["ADMINISTRATOR"])) {

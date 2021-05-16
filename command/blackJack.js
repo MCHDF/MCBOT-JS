@@ -3,7 +3,13 @@ const log = require('../config/logger.js')
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
         if (!args[0]) {
-            return message.channel.send(`:bulb: \`${prefix}블랙잭 룰, ${prefix}블랙잭 베팅 <금액(최소 500원)>\``);
+            let embed = new MessageEmbed()
+            .setTitle("BlackJack")
+            .setDescription('미니게임 - 블랙잭을 이용하기위한 명령어입니다.')
+            .setColor('GREEN')
+            .addField(`[ ${prefix}블랙잭 룰 ]`, "블랙잭에 대한 기본 규칙을 표시합니다.", true)
+            .addField(`[ ${prefix}블랙잭 베팅 <금액(최소 500원)> ]`, "지정한 금액을 베팅하여 블랙잭을 시작합니다.", true)
+            return message.channel.send(embed);
         } else if (args[0] === '베팅') {
             if(isNaN(args[1]) || parseInt(args[1]) === 0) {
                 return message.reply(":octagonal_sign: 제가 잘못 본건가요....?")
@@ -13,7 +19,7 @@ module.exports = {
             }
             con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                 if (!rows[0]) {
-                    return message.channel.send('유저분은 현재 돈을 가지고있지 않습니다.\n:bulb: \`!돈 기본지급\`');
+                    return message.channel.send('유저분은 현재 MCBOT Economy 정보를 작성하지 않으셨습니다.\n:bulb: \`!돈 기본지급\`');
                 }
                 let money = rows[0].money;
                 let user = rows[0].userId;
