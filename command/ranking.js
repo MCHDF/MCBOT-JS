@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args, con, prefix) => {
     //     return message.channel.send('해당 서버는 XP기능이 제한되어있습니다. 사용을 자제해주세요.');
     // }
     if(!args[0]) {
-        return message.channel.send(`:bulb: \`${prefix}랭킹 <돈, 랭킹>\``)
+        return message.channel.send(`:bulb: \`${prefix}랭킹 <돈, xp>\``)
     }
     if (args[0] === "xp") {
         let embed = new MessageEmbed()

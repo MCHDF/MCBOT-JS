@@ -5,7 +5,7 @@ module.exports = {
         if (!args[0]) {
             con.query(`SELECT money FROM Economy WHERE userId = '${message.author.id}';`, (err, rows) => {
                 if (!rows[0]) {
-                    return message.channel.send('유저분은 현재 돈을 가지고있지 않습니다.\n:bulb: \`!돈 기본지급\`');
+                    return message.channel.send('유저분은 현재 MCBOT Economy 정보를 작성하지 않으셨습니다.\n:bulb: \`!돈 기본지급\`');
                 }
                 let money = rows[0].money;
                 message.channel.send(`${message.author.username}님의 돈 : ${money.toLocaleString()}`);
@@ -80,7 +80,7 @@ module.exports = {
 
 module.exports.help = {
     name: "돈",
-    aliases: [''],
+    aliases: ['ehs'],
     category: "",
     description: ""
 }

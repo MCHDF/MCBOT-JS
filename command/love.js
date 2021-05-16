@@ -16,7 +16,7 @@ module.exports = {
         let user = message.author;
 
         const love = Math.random() * 100;
-        const loveindex = Math.floor(love / 10);
+        let loveindex = Math.floor(love / 10);
         if (loveindex > 100) {
             loveindex = 100;
         }
