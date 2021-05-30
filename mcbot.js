@@ -110,7 +110,7 @@ bot.on('message', async message => {
 
     let filterwords = Badwords.BADWORDS;
     let zbcFilter = Badwords.BADWORDS_zbc;
-    let messageURL = Badwords.messageURL;
+    let msgURL = Badwords.msgURL;
     let foundText = false;
 
     // 서버 멤버 카운트
@@ -179,8 +179,8 @@ bot.on('message', async message => {
             }
         }
 
-        for (var k in messageURL) {
-            if (message.content.toLowerCase().includes(messageURL[k].toLowerCase())) {
+        for (var k in msgURL) {
+            if (message.content.toLowerCase().includes(msgURL[k].toLowerCase())) {
                 foundText = false;
             }
         }
@@ -194,8 +194,8 @@ bot.on('message', async message => {
             }
         }
 
-        for (var k in messageURL) {
-            if (message.content.toLowerCase().includes(messageURL[k].toLowerCase())) {
+        for (var k in msgURL) {
+            if (message.content.toLowerCase().includes(msgURL[k].toLowerCase())) {
                 foundText = false;
             }
         }
