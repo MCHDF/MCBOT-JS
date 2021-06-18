@@ -8,12 +8,12 @@ module.exports.run = async (bot, message, args, con) => {
     // }
 
     const member = message.mentions.users.first() || message.author;
-    
+
     let embed = new MessageEmbed()
-    .setTitle(`XP - ${member.username}`)
-    .setColor("YELLOW")
-    .setDescription('불러오는 중...')
-    let msg = await message.channel.send(embed);
+        .setTitle(`XP - ${member.username}`)
+        .setColor("YELLOW")
+        .setDescription('불러오는 중...')
+    let msg = await message.channel.send({ embed: embed });
 
     const avatar = await Canvas.loadImage(member.displayAvatarURL({ format: "png", size: 1024 }));
     const background = await Canvas.loadImage(join(__dirname, "..", "imgs", "xp_bg.png"));
@@ -27,7 +27,7 @@ module.exports.run = async (bot, message, args, con) => {
         var lvl = rows[0].lvl;
         while (member.id != rows[i].id) {
             rank += 1;
-            i+=1;
+            i += 1;
             xp = rows[i].xp;
             lvl = rows[i].lvl;
         }
@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args, con) => {
         ctx.fill();
         ctx.strokeRect(310, 216, 600, 65);
         ctx.stroke();
-        
+
         ctx.fillStyle = '#4d4d4d';
         ctx.globalAlpha = 1;
         ctx.fillRect(310, 216, ((100 / (lvl * 300)) * xp) * 6, 65);
@@ -66,10 +66,10 @@ module.exports.run = async (bot, message, args, con) => {
         ctx.textAlign = 'left';
         ctx.fillText(member.tag, 310, 120);
         if (rank <= 99) {
-            
+
             ctx.font = "80px NanumBarunGothic";
             ctx.textAlign = 'left';
-            if (rank === 1){
+            if (rank === 1) {
                 rank += 'st';
                 ctx.fillStyle = '#c6a15b';
             }
@@ -81,7 +81,7 @@ module.exports.run = async (bot, message, args, con) => {
                 rank += 'rd';
                 ctx.fillStyle = '#b2675e';
             }
-            else{
+            else {
                 rank += 'th';
                 ctx.fillStyle = '#e6e8e6';
             }
@@ -100,7 +100,7 @@ module.exports.run = async (bot, message, args, con) => {
             ctx.fillStyle = '#e6e8e6';
             ctx.textAlign = 'left';
             ctx.fillText('#' + rank, 720, 95);
-    
+
             ctx.font = "30px NanumBarunGothic";
             ctx.fillStyle = '#FFFFFF';
             ctx.textAlign = 'left';
