@@ -14,7 +14,7 @@ module.exports = {
                 .setColor('GREEN')
                 .addField(`[ ${prefix}로그 지정 ]`, "사용한 채널을 로그 채널로 지정해요!", true)
                 .addField(`[ ${prefix}로그 취소 ]`, "로그 기능을 중단시켜요!", true)
-            return message.channel.send(embed);
+            return message.channel.send({embed:embed});
         }
 
         if (args[0] === '취소') {

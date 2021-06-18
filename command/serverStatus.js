@@ -11,13 +11,14 @@ module.exports = {
             return message.channel.send(`:bulb: \`${prefix}서버 카운터, ${prefix}서버 시즈니스\``)
         }
 
+        // 버튼으로 다시 리메이크하기에는 다른 임베드 메시지 전부 바꿔야 한다는 점에 불가능했다...
         if (args[0] === '카운터') {
             let embed = new MessageEmbed()
                 .setTimestamp()
                 .setColor('YELLOW')
                 .setTitle('CounterOnline Server Status')
                 .setDescription('정보를 불러오는 중입니다!')
-            let msg = await message.channel.send(embed);
+            let msg = await message.channel.send({ embed: embed });
 
             ping('zbcounter.net', 25565, (error, response) => {
                 if (error) {
@@ -26,7 +27,7 @@ module.exports = {
                         .setDescription('서버가 멈췄거나 꺼진것 같아요...')
                         .setColor('#ff0000')
                         .setTimestamp()
-                    msg.edit(embed);
+                    msg.edit({ embed: embed });
                 }
                 let embed = new MessageEmbed()
                     .setTitle('CounterOnline Server Status')
@@ -36,7 +37,7 @@ module.exports = {
                     .addField('최대 플레이어', response.maxPlayers + "명")
                     .setColor('#00ff2b')
                     .setTimestamp()
-                msg.edit(embed);
+                msg.edit({ embed: embed });
             })
         } else if (args[0] === '시즈니스') {
             let embed = new MessageEmbed()
@@ -44,7 +45,7 @@ module.exports = {
                 .setColor('YELLOW')
                 .setTitle('Sizniss Server Status')
                 .setDescription('정보를 불러오는 중입니다!')
-            let msg = await message.channel.send(embed);
+            let msg = await message.channel.send({ embed: embed });
             ping('sizniss.kr', 25565, (error, response) => {
                 if (error) {
                     let embed = new MessageEmbed()
@@ -52,7 +53,7 @@ module.exports = {
                         .setDescription('서버가 멈췄거나 꺼진것 같아요...')
                         .setColor('#ff0000')
                         .setTimestamp()
-                    msg.edit(embed);
+                    msg.edit({ embed: embed });
                 }
                 let embed = new MessageEmbed()
                     .setTitle('Sizniss Server Status')
@@ -62,7 +63,7 @@ module.exports = {
                     .addField('최대 플레이어', response.maxPlayers + "명")
                     .setColor('#00ff2b')
                     .setTimestamp()
-                msg.edit(embed);
+                msg.edit({ embed: embed });
             })
         }
     }

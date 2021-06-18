@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args, con, prefix) => {
     // if(message.guild.id === '534586842079821824') {
     //     return message.channel.send('해당 서버는 XP기능이 제한되어있습니다. 사용을 자제해주세요.');
     // }
-    if(!args[0]) {
+    if (!args[0]) {
         return message.channel.send(`:bulb: \`${prefix}랭킹 <돈, xp>\``)
     }
     if (args[0] === "xp") {
@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args, con, prefix) => {
             .setTimestamp()
             .setColor('YELLOW')
             .setDescription(`현재 서버 **${message.guild.name}** 의 XP랭킹 정보를 불러오고 있습니다!`)
-        let rankEmbed = await message.channel.send(embed)
+        let rankEmbed = await message.channel.send({ embed: embed })
 
         con.query(`SELECT * FROM xp WHERE guildId = '${message.guild.id}' ORDER BY lvl DESC, xp DESC LIMIT 10;`, (err, rows) => {
             let embed = new MessageEmbed()
@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args, con, prefix) => {
                 embed
                     .setColor('RED')
                     .addField('데이터를 불러오지 못했거나, 오류가 생긴것 같아요!');
-                rankEmbed.edit(embed);
+                rankEmbed.edit({ embed: embed });
             } else if (rows.length < 10) {
                 embed
                     .setColor('#6481BD')
@@ -38,7 +38,7 @@ module.exports.run = async (bot, message, args, con, prefix) => {
                     embed
                         .addField(`**[ ${i + 1}위 ] ${name}**`, `[ Level ] : ${lvl}\n[ XP ] : ${xp} / ${lvl * 300}\n[ 달성도 ] : ${n.toFixed(1)}%`, true)
                 }
-                rankEmbed.edit(embed);
+                rankEmbed.edit({ embed: embed });
             } else {
                 embed
                     .setColor('#6481BD')
@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args, con, prefix) => {
                     embed
                         .addField(`**[ ${i + 1}위 ] ${name}**`, `[ Level ] : ${lvl}\n[ XP ] : ${xp} / ${lvl * 300} \n[ 달성도 ] : ${n.toFixed(1)}%`, true)
                 }
-                rankEmbed.edit(embed);
+                rankEmbed.edit({ embed: embed });
             }
         });
 
@@ -83,7 +83,7 @@ module.exports.run = async (bot, message, args, con, prefix) => {
                         .addField(`**[ ${i + 1}위 ] \`${name}\`**`, `[ 잔액 ] : ${money.toLocaleString()}`, true)
                 }
             }
-            message.channel.send(embed);
+            message.channel.send({ embed: embed });
         });
     }
 

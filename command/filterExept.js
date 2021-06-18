@@ -12,7 +12,7 @@ module.exports = {
                 .setColor('GREEN')
                 .addField(`[ ${prefix}필터제외 지정 ]`, "사용한 채널을 욕설 필터링 제외 채널로 지정해요!", true)
                 .addField(`[ ${prefix}필터제외 취소 ]`, "욕설 필터링 기능을 중단시켜요!", true)
-            return message.channel.send(embed);
+            return message.channel.send({ embed: embed });
         }
 
         if (args[0] === '취소') {

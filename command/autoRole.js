@@ -5,16 +5,16 @@ module.exports = {
 
         if (!args[0]) {
             let embed = new MessageEmbed()
-            .setTitle("자동역할")
-            .setDescription('서버에 입장하는 유저들에게 역할을 자동으로 부여해주는 명령어입니다.')
-            .setColor('GREEN')
-            .addField(`[ ${prefix}자동역할 지정 <멘션> ]`, "멘션한 역할을 자동으로 부여할 역할로 지정합니다.", true)
-            .addField(`[ ${prefix}자동역할 취소 ]`, "역할의 자동 부여를 중단합니다.", true)
-            return message.channel.send(embed);
+                .setTitle("자동역할")
+                .setDescription('서버에 입장하는 유저들에게 역할을 자동으로 부여해주는 명령어입니다.')
+                .setColor('GREEN')
+                .addField(`[ ${prefix}자동역할 지정 <멘션> ]`, "멘션한 역할을 자동으로 부여할 역할로 지정합니다.", true)
+                .addField(`[ ${prefix}자동역할 취소 ]`, "역할의 자동 부여를 중단합니다.", true)
+            return message.channel.send({ embed: embed });
         }
 
         if (args[0] === '취소') {
-            
+
             let gid = message.guild.id;
 
             if (message.deletable) {
@@ -42,11 +42,11 @@ module.exports = {
                         .setTimestamp()
                         .setFooter(`${message.guild.name}`)
                         .addField('[ 역할 ]', `${ROLE.name}`);
-                    ch.send(embed);
+                    ch.send({ embed: embed });
                     return message.channel.send(':white_check_mark: 역할 자동부여 취소가 완료되었어요!').then(m => m.delete({ timeout: 5000 }));;
                 }
             })
-        } else if(args[0]==="지정") {
+        } else if (args[0] === "지정") {
             let ROLE = message.mentions.roles.first();
             let gid = message.guild.id;
             if (!message.member.hasPermission(["ADMINISTRATOR"])) {
@@ -71,7 +71,7 @@ module.exports = {
                         .setTimestamp()
                         .setFooter(`${message.guild.name}`)
                         .addField('[ 역할 ]', `${ROLE.name}`)
-                    ch.send(embed);
+                    ch.send({ embed: embed });
                     return message.channel.send(':white_check_mark: 자동부여 역할 설정 완료!').then(m => m.delete({ timeout: 5000 }));
                 } else {
                     let ch = bot.channels.cache.get(`${logCh}`);
@@ -82,7 +82,7 @@ module.exports = {
                         .setTimestamp()
                         .setFooter(`${message.guild.name}`)
                         .addField('[ 역할 ]', `${ROLE.name}`)
-                    ch.send(embed);
+                    ch.send({ embed: embed });
                     return message.channel.send(':white_check_mark: 자동부여 역할 업데이트 완료!').then(m => m.delete({ timeout: 5000 }));
                 }
             })
@@ -92,7 +92,7 @@ module.exports = {
 
 module.exports.help = {
     name: "자동역할",
-    aliases: ['오토롤','wkehddurgkf'],
+    aliases: ['오토롤', 'wkehddurgkf'],
     category: "",
     description: ""
 }

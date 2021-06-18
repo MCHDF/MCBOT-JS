@@ -4,14 +4,14 @@ module.exports = {
     run: async (bot, message, args, con, prefix) => {
         if (!args[0]) {
             let embed = new MessageEmbed()
-            .setTitle("BlackJack")
-            .setDescription('미니게임 - 블랙잭을 이용하기위한 명령어입니다.')
-            .setColor('GREEN')
-            .addField(`[ ${prefix}블랙잭 룰 ]`, "블랙잭에 대한 기본 규칙을 표시합니다.", true)
-            .addField(`[ ${prefix}블랙잭 베팅 <금액(최소 500원)> ]`, "지정한 금액을 베팅하여 블랙잭을 시작합니다.", true)
+                .setTitle("BlackJack")
+                .setDescription('미니게임 - 블랙잭을 이용하기위한 명령어입니다.')
+                .setColor('GREEN')
+                .addField(`[ ${prefix}블랙잭 룰 ]`, "블랙잭에 대한 기본 규칙을 표시합니다.", true)
+                .addField(`[ ${prefix}블랙잭 베팅 <금액(최소 500원)> ]`, "지정한 금액을 베팅하여 블랙잭을 시작합니다.", true)
             return message.channel.send(embed);
         } else if (args[0] === '베팅') {
-            if(isNaN(args[1]) || parseInt(args[1]) === 0) {
+            if (isNaN(args[1]) || parseInt(args[1]) === 0) {
                 return message.reply(":octagonal_sign: 제가 잘못 본건가요....?")
             }
             if (isNaN(args[1]) || parseInt(args[1]) < 0) {
@@ -57,7 +57,7 @@ module.exports = {
                     .addField('[ 봇의 총합 ]', `??`, true)
                     .addField('\u200B', '\u200B', true)
 
-                message.channel.send(embed).then(msg => {
+                message.channel.send({ embed: embed }).then(msg => {
                     msg.react('👇').then(r => {
                         msg.react('🤚').then(r => {
                             msg.react('✌').then(r => {
@@ -109,7 +109,7 @@ module.exports = {
                                         .addField('[ 봇의 손 ]', `${botArray}`, true)
                                         .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                         .addField('\u200B', '\u200B', true)
-                                    msg.edit(result);
+                                    msg.edit({ embed: result });
                                     log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                     hit.stop();
                                     stand.stop();
@@ -129,7 +129,7 @@ module.exports = {
                                         .addField('[ 봇의 손 ]', `${botArray}`, true)
                                         .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                         .addField('\u200B', '\u200B', true)
-                                    msg.edit(result);
+                                    msg.edit({ embed: result });
                                     con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                         let money = rows[0].money;
                                         con.query(`UPDATE Economy SET money = ${money + (betMoney * 1.5)} WHERE userId = '${user}';`);
@@ -153,7 +153,7 @@ module.exports = {
                                         .addField('[ 봇의 손 ]', `${botArray}`, true)
                                         .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                         .addField('\u200B', '\u200B', true)
-                                    msg.edit(result);
+                                    msg.edit({ embed: result });
                                     log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                     hit.stop();
                                     stand.stop();
@@ -173,7 +173,7 @@ module.exports = {
                                         .addField('[ 봇의 손 ]', `${botArray}`, true)
                                         .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                         .addField('\u200B', '\u200B', true)
-                                    msg.edit(result);
+                                    msg.edit({ embed: result });
                                     con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                         let money = rows[0].money;
                                         con.query(`UPDATE Economy SET money = ${money + betMoney} WHERE userId = '${user}';`);
@@ -218,7 +218,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop()
@@ -238,7 +238,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -262,7 +262,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop()
@@ -282,7 +282,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop()
@@ -302,7 +302,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -326,7 +326,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + betMoney} WHERE userId = '${user}';`);
@@ -350,7 +350,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + betMoney} WHERE userId = '${user}';`);
@@ -375,7 +375,7 @@ module.exports = {
                                                 .addField('[ 봇의 손 ]', `${botArray}`, true)
                                                 .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                                 .addField('\u200B', '\u200B', true)
-                                            msg.edit(result);
+                                            msg.edit({ embed: result });
                                             con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                                 let money = rows[0].money;
                                                 con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -399,7 +399,7 @@ module.exports = {
                                                 .addField('[ 봇의 손 ]', `${botArray}`, true)
                                                 .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                                 .addField('\u200B', '\u200B', true)
-                                            msg.edit(result);
+                                            msg.edit({ embed: result });
                                             log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                             hit.stop();
                                             stand.stop();
@@ -419,7 +419,7 @@ module.exports = {
                                                 .addField('[ 봇의 손 ]', `${botArray}`, true)
                                                 .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                                 .addField('\u200B', '\u200B', true)
-                                            msg.edit(result);
+                                            msg.edit({ embed: result });
                                             con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                                 let money = rows[0].money;
                                                 con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -457,7 +457,7 @@ module.exports = {
                                         }, 0);
                                         botCount = sum2;
                                     }
-                                    
+
                                     if (playerCount > 21) {
                                         con.query(`UPDATE Economy SET money = ${money - betMoney} WHERE userId = '${user}';`);
                                         let result = new MessageEmbed()
@@ -471,7 +471,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop();
@@ -491,7 +491,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -515,7 +515,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop();
@@ -535,7 +535,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop();
@@ -555,7 +555,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -579,7 +579,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `${botArray}`, true)
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + betMoney} WHERE userId = '${user}';`);
@@ -601,7 +601,7 @@ module.exports = {
                                             .addField('[ 봇의 손 ]', `?? ${botCard2} ??`, true)
                                             .addField('[ 봇의 총합 ]', `??`, true)
                                             .addField('\u200B', '\u200B', true)
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                     }
                                 })
                                 // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────//
@@ -619,7 +619,7 @@ module.exports = {
                                         stand.stop();
                                         surrender.stop();
                                         double.stop();
-                                        return msg.edit(result);
+                                        return msg.edit({ embed: result });
                                     }
                                     let playerCard3 = Math.floor(Math.random() * 10) + 2;
                                     playerArray.push(playerCard3);
@@ -655,7 +655,7 @@ module.exports = {
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
                                             .setFooter('Double Down!')
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop();
@@ -676,7 +676,7 @@ module.exports = {
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
                                             .setFooter('Double Down!')
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -701,7 +701,7 @@ module.exports = {
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
                                             .setFooter('Double Down!')
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop();
@@ -722,7 +722,7 @@ module.exports = {
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
                                             .setFooter('Double Down!')
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                         hit.stop();
                                         stand.stop();
@@ -743,7 +743,7 @@ module.exports = {
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
                                             .setFooter('Double Down!')
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -768,7 +768,7 @@ module.exports = {
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
                                             .setFooter('Double Down!')
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + betMoney} WHERE userId = '${user}';`);
@@ -793,7 +793,7 @@ module.exports = {
                                             .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                             .addField('\u200B', '\u200B', true)
                                             .setFooter('Double Down!')
-                                        msg.edit(result);
+                                        msg.edit({ embed: result });
                                         con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                             let money = rows[0].money;
                                             con.query(`UPDATE Economy SET money = ${money + betMoney} WHERE userId = '${user}';`);
@@ -819,7 +819,7 @@ module.exports = {
                                                 .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                                 .addField('\u200B', '\u200B', true)
                                                 .setFooter('Double Down!')
-                                            msg.edit(result);
+                                            msg.edit({ embed: result });
                                             con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                                 let money = rows[0].money;
                                                 con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -844,7 +844,7 @@ module.exports = {
                                                 .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                                 .addField('\u200B', '\u200B', true)
                                                 .setFooter('Double Down!')
-                                            msg.edit(result);
+                                            msg.edit({ embed: result });
                                             log.info(`BlackJack >> ${message.author.username}님이 ${betMoney.toLocaleString()}원 베팅하여 ${betMoney.toLocaleString()}원 손실`)
                                             hit.stop();
                                             stand.stop();
@@ -865,7 +865,7 @@ module.exports = {
                                                 .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                                 .addField('\u200B', '\u200B', true)
                                                 .setFooter('Double Down!')
-                                            msg.edit(result);
+                                            msg.edit({ embed: result });
                                             con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                                 let money = rows[0].money;
                                                 con.query(`UPDATE Economy SET money = ${money + (betMoney * 2)} WHERE userId = '${user}';`);
@@ -903,7 +903,7 @@ module.exports = {
                                         .addField('[ 봇의 손 ]', `${botArray}`, true)
                                         .addField('[ 봇의 총합 ]', `${botCount}`, true)
                                         .addField('\u200B', '\u200B', true)
-                                    msg.edit(result);
+                                    msg.edit({ embed: result });
                                     con.query(`SELECT * FROM Economy WHERE userId = '${message.author.id}'`, (err, rows) => {
                                         let money = rows[0].money;
                                         con.query(`UPDATE Economy SET money = ${(money + (betMoney / 2))} WHERE userId = '${user}';`);
@@ -931,7 +931,7 @@ module.exports = {
 
                 .setFooter("[ 문의 ] : MCHDF#9999")
 
-            return message.channel.send(embed);
+            return message.channel.send({ embed: embed });
         }
     }
 }
@@ -939,7 +939,7 @@ module.exports = {
 
 module.exports.help = {
     name: "블랙잭",
-    aliases: ['ㅠㅓ','bj','qmfforwor'],
+    aliases: ['ㅠㅓ', 'bj', 'qmfforwor'],
     category: "",
     description: ""
 }

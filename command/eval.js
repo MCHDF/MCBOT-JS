@@ -43,7 +43,7 @@ module.exports = {
                     .addField('**Time**', `\`\`\`${Time}ms\`\`\``)
                     .setColor('GREEN')
                     .setTimestamp()
-                await message.channel.send(evalPrint);
+                await message.channel.send({embed:evalPrint});
             } else {
                 const output = new MessageAttachment(Buffer.from(res), 'output.txt');
                 await message.channel.send(output);

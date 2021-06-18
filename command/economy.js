@@ -12,7 +12,7 @@ module.exports = {
             .setColor('#FFE4E4')
             .setTimestamp()
             .setFooter('문의 : MCHDF#9999')
-        return message.channel.send(embed);
+        return message.channel.send({embed:embed});
     }
 }
 

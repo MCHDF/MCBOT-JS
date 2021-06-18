@@ -29,7 +29,7 @@ module.exports = {
             .addField('[ 서버 가입일 ]', joindate, true)
             .addField('[ 계정 생성일 ]', createdate, true)
             .addField('[ 유저 상태 ]', `**${status}**`, true);
-        message.channel.send(embed);
+        message.channel.send({ embed: embed });
     }
 }
 

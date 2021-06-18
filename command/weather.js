@@ -29,7 +29,7 @@ module.exports = {
                 .setFooter('검색 엔진 : NAVER')
                 .setDescription('오늘 하루 예상 날씨 정보를 불러오고있어요...조금만 기다려주세요!')
                 .setColor("YELLOW");
-            const msg = await message.channel.send(waitEmbed);
+            const msg = await message.channel.send({ embed: waitEmbed });
 
             request(url, function (err, res, html) {
                 if (err) throw err;
@@ -76,7 +76,7 @@ module.exports = {
                             .setFooter('날씨 정보 출처 : NAVER')
                             .setDescription('검색결과가 존재하지 않습니다.')
                             .setColor("RED")
-                        msg.edit(embed);
+                        msg.edit({ embed: embed });
                     } else {
                         let embed = new MessageEmbed()
                             .setTitle(`${args.slice(0).join(" ")} 날씨`)
@@ -89,12 +89,12 @@ module.exports = {
                             .addField('체감 온도', `${sensible}˚`, true)
                             .addField('예상 온도', `${min}˚ / ${max}˚`, true)
                         if (rainfall === '') {
-                            msg.edit(embed);
+                            msg.edit({ embed: embed });
                             return
                         } else {
                             embed
                                 .addField('시간당 강수량', `${rainfall}mm`)
-                            msg.edit(embed);
+                            msg.edit({ embed: embed });
                             return
                         }
                     }

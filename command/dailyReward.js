@@ -49,7 +49,7 @@ module.exports = {
                             .addField('[ 보상 ]', `${reward.toLocaleString()}원`)
                             .addField('[ 잔액 ]', `${money.toLocaleString()}원`)
                             .addField('[ 다음 보상 ]', `${nextDaily}`)
-                        return message.channel.send(embed);
+                        return message.channel.send({ embed: embed });
                     })
                 } else {
                     return message.reply(`이미 보상을 획득하셨습니다. 다음 보상 날짜는 \`${nextDaily}\` 입니다.`);

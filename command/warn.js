@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
-        if(message.guild.id === '534586842079821824') {
+        if (message.guild.id === '534586842079821824') {
             return message.channel.send("해당 길드 사용 중지"); // 일단 이건 상황보고 결정하는걸로
         }
         if (!args[0]) {
@@ -15,7 +15,7 @@ module.exports = {
             if (!message.member.hasPermission(["ADMINISTRATOR"])) {
                 embed
                     .addField("경고 보기", "```자신의 경고 상황을 표시합니다!\n사용법 : " + prefix + "경고 보기```")
-                return message.channel.send(embed);
+                return message.channel.send({ embed: embed });
             } else {
                 embed
                     .addField("경고 보기", "```자신의 경고 상황을 표시합니다!\n사용법 : " + prefix + "경고 보기```")
@@ -23,7 +23,7 @@ module.exports = {
                     .addField("경고 추가", "```멘션한 유저에게 경고를 추가시켜요!\n관리자 권한이 필요하고, 이유가 꼭 필요해요!\n사용법 : " + prefix + "경고 추가 <횟수> <멘션> <이유>```")
                     .addField("경고 취소", "```멘션한 유저의 경고를 취소시켜요!\n관리자 권한이 필요해요!\n사용법 : " + prefix + "경고 취소 <횟수> <멘션>```")
                     .addField("경고 유저", "```유저의 경고 상황을 표시합니다!\n관리자 권한이 필요해요!\n사용법 : " + prefix + "경고 유저 <멘션>```");
-                return message.channel.send(embed);
+                return message.channel.send({ embed: embed });
             }
         }
         if (args[0] === '보기') {
@@ -43,7 +43,7 @@ module.exports = {
                         .setFooter(`Request By ${message.author.tag}`)
                         .addField('[ 유저 이름 ]', `<@${user.id}>`, true)
                         .addField('[ 경고 횟수 ]', '0')
-                    return message.channel.send(embed);
+                    return message.channel.send({ embed: embed });
                 }
                 if (err) throw err;
                 let embed = new MessageEmbed()
@@ -54,7 +54,7 @@ module.exports = {
                     .setFooter(`Request By ${user.tag}`)
                     .addField('[ 유저 이름 ]', `<@${user.id}>`, true)
                     .addField('[ 경고 횟수 ]', rows[0].warning)
-                return message.channel.send(embed);
+                return message.channel.send({ embed: embed });
             });
         } else if (args[0] === '추가') {
             if (message.deletable) {
@@ -106,7 +106,7 @@ module.exports = {
                             embed
                                 .addField('[ 경고 횟수 ]', rows[0].warning)
                                 .addField('[ 이유 ]', reason);
-                            ch.send(embed);
+                            ch.send({ embed: embed });
                             return message.channel.send(":white_check_mark: 경고 부여 완료!").then(m => m.delete({ timeout: 3000 }));
                         });
                     } else {
@@ -116,7 +116,7 @@ module.exports = {
                             embed
                                 .addField('[ 경고 횟수 ]', rows[0].warning)
                                 .addField('[ 이유 ]', reason);
-                            ch.send(embed);
+                            ch.send({ embed: embed });
                             return message.channel.send(":white_check_mark: 경고 부여 완료!").then(m => m.delete({ timeout: 3000 }));
                         });
                     }
@@ -169,7 +169,7 @@ module.exports = {
                         embed
                             .setTitle(`모든 경고 취소`)
                             .addField('[ 경고 횟수 ]', '0')
-                        ch.send(embed);
+                        ch.send({ embed: embed });
                         return message.channel.send(":white_check_mark: 해당 유저의 경고가 취소되었어요!").then(m => m.delete({ timeout: 5000 }));
                     }
                     warning = warning - countWarn;
@@ -177,7 +177,7 @@ module.exports = {
                     embed
                         .setTitle(`경고 ${countWarn}}회 취소`)
                         .addField('[ 경고 횟수 ]', warning)
-                    ch.send(embed);
+                    ch.send({ embed: embed });
                     return message.channel.send(":white_check_mark: 해당 유저의 경고가 취소되었어요!").then(m => m.delete({ timeout: 5000 }));
                 });
             });
@@ -204,7 +204,7 @@ module.exports = {
                         .setFooter(`Request By ${user.tag}`)
                         .addField('[ 유저 이름 ]', `<@${user.id}>`, true)
                         .addField('[ 경고 횟수 ]', '0')
-                    return message.channel.send(embed);
+                    return message.channel.send({ embed: embed });
                 }
                 if (err) throw err;
                 let embed = new MessageEmbed()
@@ -215,7 +215,7 @@ module.exports = {
                     .setFooter(`Request By ${message.author.tag}`)
                     .addField('[ 유저 이름 ]', `<@${user.id}>`, true)
                     .addField('[ 경고 횟수 ]', rows[0].warning)
-                return message.channel.send(embed);
+                return message.channel.send({ embed: embed });
             });
         }
     }

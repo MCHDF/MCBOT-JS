@@ -11,7 +11,7 @@ module.exports = {
             .setTimestamp()
             .setColor("YELLOW")
             .setDescription('시스템 상태를 불러오는 중입니다...')
-        let msg = await message.channel.send(embed);
+        let msg = await message.channel.send({ embed: embed });
         let result = new MessageEmbed()
             .setTitle(`${bot.user.username} System Status [Test]`)
             .setTimestamp()
@@ -22,19 +22,19 @@ module.exports = {
             var time = JSON.parse(body)
             await result
                 .setDescription(`${time}`)
-            msg.edit(result);
+            msg.edit({ embed: result });
         })
 
         request(cpuapi, async function (err, res, body) {
             if (err) return message.channel.send(`\`\`\`${err}\`\`\``);
             await cpu(body, result)
-            msg.edit(result);
+            msg.edit({ embed: result });
         })
 
         request(mem, async function (err, res, body) {
             if (err) return message.channel.send(`\`\`\`${err}\`\`\``);
             await memory(body, result);
-            msg.edit(result);
+            msg.edit({ embed: result });
         })
     }
 }

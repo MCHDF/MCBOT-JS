@@ -28,7 +28,7 @@ module.exports = {
             .setColor('#FEB1FF')
             .setDescription(`\`\`${user.username}\`\`님! 전 당신을...이만큼 사랑해요!`)
             .addField(`💟 ${love.toFixed(0)}%`, loveLevel);
-        return message.channel.send(embed);
+        return message.channel.send({embed:embed});
     }
 }
 

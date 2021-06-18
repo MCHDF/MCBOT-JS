@@ -22,7 +22,7 @@ module.exports = {
                         .addField('[ 기본 지급액 ]', '100,000원')
                         .addField('[ 문의 ]', 'MCHDF#9999')
                         .setTimestamp()
-                    return message.channel.send(embed);
+                    return message.channel.send({ embed: embed });
                 } else {
                     return message.channel.send('유저분은 이미 기본지원금을 받으셨습니다.');
                 }

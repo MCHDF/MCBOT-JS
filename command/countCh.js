@@ -13,7 +13,7 @@ module.exports = {
                 .addField(`[ ${prefix}카운트 변경 <채널멘션> ]`, "역할의 자동 부여를 중단합니다.", true)
                 .addField(`[ ${prefix}카운트 취소 ]`, "", true)
                 .addField(`[ ${prefix}카운트 이름 <변경할 이름> ]`, "", true)
-            return message.channel.send(embed);
+            return message.channel.send({ embed: embed });
         } else if (args[0] === "설정") {
             let channel = message.mentions.channels.first();
             channel = channel.id;

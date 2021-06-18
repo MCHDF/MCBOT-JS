@@ -60,7 +60,7 @@ module.exports = {
                 // 권한이 필요한 모더레이터 전용 명령어 설명
                 .addField('👮‍♂️ **운영자 전용 명령어**', "```권한이 필요한 운영자 전용 도움말을 표시해요!\n사용법 : " + prefix + "help 도구```")
         }
-        return message.channel.send(embed);
+        return message.channel.send({ embed: embed });
     }
 }
 
