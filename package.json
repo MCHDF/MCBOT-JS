@@ -1,6 +1,6 @@
 {
   "name": "mcbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCHDF's DIscord js Bot",
   "main": "mcbot.js",
   "dependencies": {
