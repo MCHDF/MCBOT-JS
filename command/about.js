@@ -1,31 +1,46 @@
 const { MessageEmbed } = require('discord.js');
 const dateFormat = require('dateformat');
+const { MessageButton, MessageActionRow } = require('discord-buttons');
 
 module.exports = {
     run: async (bot, message, args) => {
 
-        message.delete();
-        message.reply("개인 DM을 확인해주세요!").then(m => m.delete({ timeout: 3000 }));
+        const notion = new MessageButton()
+        .setLabel('Notion')
+        .setEmoji('💡')
+        .setStyle('url')
+        .setURL('https://www.notion.so/MCHDF-7aaa4aa0b17b4821bcd1c2d8fc0104df')
+
+        const github = new MessageButton()
+        .setLabel('Github')
+        .setEmoji('👾')
+        .setStyle('url')
+        .setURL('https://github.com/MCHDF')
+
+        const row = new MessageActionRow()
+        .addComponent(notion)
+        .addComponent(github)
+
         let createdate = dateFormat(bot.user.createdAt, 'yyyy.mm.dd');
         let embed = new MessageEmbed()
-            .setURL("https://github.com/MCHDF")
             .setTitle(`${bot.user.username}에 대해...`)
             .setColor("#FFE4E4")
-            .setDescription("여러가지 유틸과 유머 기능, 음악 기능을 탑재한 봇이에요!")
+            .setDescription("여러가지 유틸리티와 음악 재생 기능을 탑재한 봇이에요!")
             .setTimestamp()
             .setThumbnail(bot.user.displayAvatarURL())
             .addField("[ 봇 이름 ]", "MCBOT#2244", true)
             .addField("[ 소유자 ]", "MCHDF#9999", true)
-            .addField("[ 지역 ]", ":flag_kr:")
+            .addField("[ 지역 ]", 
+            ":flag_kr:")
             .addField("[ 생일 ]", createdate)
             .addField("[ 길드 ]", `**${bot.guilds.cache.size}**개`, true)
             .addField("[ 유저 (중복 포함) ]", `**${bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}**명`, true)
             .addField("[ 채널 ]", `**${bot.channels.cache.size}**개`, true)
             .setFooter("[ 문의 ] : MCHDF#9999")
-        message.fetch(message.id).then(m => {
-            m.react("💰");
+        return message.channel.send({
+            embed: embed,
+            component: row
         });
-        return message.author.send(embed);
     }
 }
 
