@@ -12,10 +12,12 @@
     "cheerio": "^1.0.0-rc.5",
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
+    "discord-buttons": "^3.2.1",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "hot-shots": "^8.3.2",
     "join": "^3.0.0",
     "minecraft-server-util": "^1.4.3",
     "moment": "^2.29.1",
@@ -38,5 +40,6 @@
   "bugs": {
     "url": "https://github.com/MCHDF/MCBOT/issues"
   },
-  "homepage": "https://github.com/MCHDF/MCBOT#readme"
+  "homepage": "https://github.com/MCHDF/MCBOT#readme",
+  "devDependencies": {}
 }
