@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const dateFormat = require('dateformat');
 
 module.exports = {
-    run: (bot, message, args) => {
+    run: (bot, message) => {
         let user = message.mentions.users.first() || message.author;
 
         if (user.presence.status === "dnd") user.presence.status = "방해 금지"
