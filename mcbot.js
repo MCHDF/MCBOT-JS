@@ -2,8 +2,10 @@ const Discord = require('discord.js');
 const fs = require("fs");
 const con = require('./config/database')
 const bot = new Discord.Client();
+require('discord-buttons')(bot)
 const Badwords = require("./jsons/fiterWords.json");
 const log = require('./config/logger.js');
+
 const swearLog = require('./config/swearLogger');
 require('dotenv').config();
 var StatsD = require('hot-shots');
@@ -38,6 +40,120 @@ function generatexp() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+const chooseArr = ["🖐", "✌", "✊"]
+
+bot.on('clickButton', async (button) => {
+    if (button.id === 'rps_1' || button.id === 'rps_2' || button.id === 'rps_3') {
+
+        const botchoice = chooseArr[Math.floor(Math.random() * chooseArr.length)];
+        const result = await getResult(button, botchoice);
+        var reacted = '';
+        if (button.id === "rps_1") {
+            reacted = "✌"
+        } else if (button.id === "rps_2") {
+            reacted = "✊"
+        } else if (button.id === "rps_3") {
+            reacted = "🖐"
+        }
+        const embed = new Discord.MessageEmbed()
+            .setColor('#95fcff')
+            .setAuthor(`도전자 - ${button.message.author.tag}`, button.message.author.avatarURL({ size: 2048 }))
+            .setTitle('미니게임 - 가위바위보')
+            .setDescription("")
+            .addField(result, `유저 ${reacted} vs ${botchoice} 봇`)
+            .setTimestamp();
+        button.message.edit({ embed: embed })
+    }
+})
+
+function getResult(button, botChosen) {
+    if(botChosen === "✌") {
+        botChosen = "rps_1"
+    } else if (botChosen === "✊") {
+        botChosen = "rps_2"
+    } else if (botChosen === "🖐") {
+        botChosen = "rps_3"
+    }
+
+    if ((button.id === "rps_2" && botChosen === "rps_1") ||
+        (button.id === "rps_3" && botChosen === "rps_2") ||
+        (button.id === "rps_1" && botChosen === "rps_3")) {
+        con.query(`SELECT * FROM xp WHERE guildId = '${button.guild.id}' AND id = '${button.message.author.id}'`, (err, rows) => {
+            if (err) throw err;
+            let xp = rows[0].xp;
+            let lvl = rows[0].lvl;
+            if (lvl <= 4) {
+                con.query(`UPDATE xp Set xp = ${xp + 100} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 5 || lvl <= 9) {
+                con.query(`UPDATE xp Set xp = ${xp + 130} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 10 || lvl <= 14) {
+                con.query(`UPDATE xp Set xp = ${xp + 150} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 15 || lvl <= 19) {
+                con.query(`UPDATE xp Set xp = ${xp + 180} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 20 || lvl <= 24) {
+                con.query(`UPDATE xp Set xp = ${xp + 220} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 25 || lvl <= 29) {
+                con.query(`UPDATE xp Set xp = ${xp + 250} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 30 || lvl <= 34) {
+                con.query(`UPDATE xp Set xp = ${xp + 290} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 35 || lvl <= 39) {
+                con.query(`UPDATE xp Set xp = ${xp + 320} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 40 || lvl <= 44) {
+                con.query(`UPDATE xp Set xp = ${xp + 360} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 45 || lvl <= 49) {
+                con.query(`UPDATE xp Set xp = ${xp + 390} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 50) {
+                con.query(`UPDATE xp Set xp = ${xp + 400} WHERE id = '${button.message.author.id}'`);
+            } else if (lvl >= 75) {
+                con.query(`UPDATE xp Set xp = ${xp + 500} WHERE id = '${button.message.author.id}'`);
+            }
+        })
+        return "승리하셨습니다!";
+    } else if (button.id === botChosen) {
+        return "무승부입니다!";
+    } else {
+        return "패배하셨습니다!";
+    }
+}
+
+// CounterOnline Message Delete Event
+bot.on('messageDelete', async message => {
+    if(message.author.bot) {
+        return;
+    }
+    if(message.guild.id != ZBC) {
+        return;
+    } else {
+        let adminRole = message.member.roles.cache.some((role) => role.id === "671989651484966912");
+        let staffRole = message.member.roles.cache.some((role) => role.id === "671990343780270090");
+        let light_bear = message.member.id === "460279565789691916";
+        
+        if(adminRole || staffRole) {
+            if(light_bear) {
+                await deletedMessage(message, bot);
+                return;
+            }
+            return;
+        } 
+        await deletedMessage(message, bot);
+    }
+})
+
+async function deletedMessage(message, bot) {
+    let ch = bot.channels.cache.get('849965849971392512');
+    let attachment = (await message.attachments)
+    let embed = new Discord.MessageEmbed()
+        .setAuthor(message.member.displayName, message.author.displayAvatarURL())
+        .setDescription(message.content)
+        .setTimestamp()
+        .setColor("RED")
+        ch.send(embed)
+    if (attachment) {
+        for (let i = 0; i < attachment.array().length; i++) {
+            ch.send(attachment.array()[i])
+        }
+    }
+}
 
 bot.on('ready', () => {
     console.log(`┌────────────────────────────┐`);
@@ -52,7 +168,7 @@ bot.on('ready', () => {
         `MCprefix로 서버별 접두사 확인`
     ]
     let value = 0;
-    setInterval(function () {
+    setInterval(() => {
         let status = statuses[value];
         value++;
         if (value >= statuses.length) {
@@ -264,7 +380,7 @@ bot.on('message', async message => {
 
 bot.on('guildMemberAdd', member => {
 
-    if (member.guild.id === "534586842079821824") {
+    if (member.guild.id === ZBC) {
         return;
     }
     let Guild = member.guild.id;
@@ -317,7 +433,7 @@ bot.on('guildMemberAdd', member => {
 
 bot.on('guildMemberRemove', member => {
 
-    if (member.guild.id === "534586842079821824") {
+    if (member.guild.id === ZBC) {
         return;
     }
     let Guild = member.guild.id;
