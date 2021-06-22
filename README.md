@@ -2,7 +2,7 @@
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-ff69b4?style=for-the-badge&logo=appveyor.svg" />
   <a href="https://github.com/MCHDF/MCBOT#readme" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen?style=for-the-badge&logo=appveyor.svg" />
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-no-red?style=for-the-badge&logo=appveyor.svg" />
   </a>
   <a href="https://github.com/MCHDF/MCBOT/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green?style=for-the-badge&logo=appveyor.svg" />
@@ -75,3 +75,8 @@ Discord JS로 만들어진 여러 유틸과 유머기능 등을 담은 봇입니
 Copyright © 2020 [MCHDF](https://github.com/MCHDF).<br />
 This project is [MIT](https://github.com/MCHDF/MCBOT/blob/master/LICENSE) licensed.
 
+## 🎮 Minecraft!
+
+코드 일부에는 카운터온라인에 대한 예외처리가 되어있습니다.<br />
+
+<a href="https://minelist.kr/servers/8223"><img src="https://minelist.kr/servers/8223/banner/modern.png" /></a>
