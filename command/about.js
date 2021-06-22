@@ -9,7 +9,7 @@ module.exports = {
         .setLabel('Notion')
         .setEmoji('💡')
         .setStyle('url')
-        .setURL('https://www.notion.so/MCHDF-7aaa4aa0b17b4821bcd1c2d8fc0104df')
+        .setURL('https://www.notion.so/mccounter/MCBOT-4105c7e176a1424fbd1398fea7d084e8')
 
         const github = new MessageButton()
         .setLabel('Github')
