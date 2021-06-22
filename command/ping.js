@@ -2,11 +2,11 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     run: async (bot, message, args) => {
-        
+
         let embed = new MessageEmbed()
         .setTitle('🏓 Ping')
         .setColor('YELLOW')
-        .setAuthor(message.member.displayName())
+        .setAuthor(message.member.displayName)
         .setTimestamp()
         .setFooter(message.guild.name)
         .setDescription('저와 서버간의 거리를 계산중이에요...')
@@ -18,7 +18,9 @@ module.exports = {
         .addField('🏓 Discord API Ping', `\`\`\`${Math.round(bot.ws.ping)}ms\`\`\``)
         .setColor('GREEN')
 
-        msg.edit({embed : embed});
+        msg.edit({
+            embed : embed
+        });
     }
 }
 
