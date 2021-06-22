@@ -26,7 +26,7 @@ module.exports = {
 
 module.exports.help = {
     name: "say",
-    aliases: ['age'],
+    aliases: ['ㄴ묘'],
     category: "",
     description: ""
 }
