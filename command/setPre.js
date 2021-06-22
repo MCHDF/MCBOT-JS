@@ -43,7 +43,7 @@ module.exports = {
 
 module.exports.help = {
     name: "prefix",
-    aliases: ['s'],
+    aliases: [''],
     category: "",
     description: ""
 }
