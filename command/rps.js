@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 const usedCommand = new Set();
 module.exports = {
     run: async (bot, message, args, con) => {
-        message.delete();
+        
         if (message.guild.id != '534586842079821824') {
             if (usedCommand.has(message.author.id)) {
                 return message.reply(':arrows_counterclockwise: 아직 쿨타임이 끝나지 않았어요!')
@@ -53,7 +53,7 @@ module.exports = {
 
 module.exports.help = {
     name: "rps",
-    aliases: ['정보', '유저'],
+    aliases: ['겐'],
     category: "Funny Game",
     description: ""
 }
