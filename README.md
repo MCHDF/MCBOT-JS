@@ -1,3 +1,7 @@
+
+<p align="center">
+    <img alt="MCBOT" src="./imgs/MCBOT.PNG">
+</p>
 <h1 align="center">Welcome to Discord Js MCBOT 👋</h1>
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-ff69b4?style=for-the-badge&logo=appveyor.svg" />
