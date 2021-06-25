@@ -12,7 +12,7 @@ module.exports = {
             if (message.author.id != '468781931182555136') {
                 return message.channel.send('엑세스 거부');
             } else {
-                con.query(`UPDATE Economy SET nextDaily = '${currDate}' WHERE userId = '${message.author.id}';`);
+                con.query(`UPDATE Economy SET nextDaily = '${currDate}';`);
                 return message.channel.send('일일보상 시간 카운팅을 초기화 합니다!');
             }
         } else if (!args[0]) {
