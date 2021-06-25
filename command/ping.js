@@ -14,7 +14,7 @@ module.exports = {
 
         embed
         .setDescription('서버에서 공이 다시 날아왔어요!')
-        .addField('🏓 Message Ping', `\`\`\`${Math.floor(msg.createdTimestamp - message.createdTimestamp)}ms\`\`\``)
+        .addField('🏓 Bot Ping', `\`\`\`${Math.floor(msg.createdTimestamp - message.createdTimestamp)}ms\`\`\``)
         .addField('🏓 Discord API Ping', `\`\`\`${Math.round(bot.ws.ping)}ms\`\`\``)
         .setColor('GREEN')
 
@@ -26,7 +26,7 @@ module.exports = {
 
 module.exports.help = {
     name: "핑",
-    aliases: ['핑'],
+    aliases: ['vld'],
     category: "",
     description: "Pinging to Server"
 }

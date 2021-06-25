@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports = {
     run: async (bot, message, args, con, prefix) => {
         if (!message.member.hasPermission("ADMINISTRATOR")) {
@@ -9,10 +11,10 @@ module.exports = {
                 .setTitle("카운트 채널")
                 .setDescription('서버의 유저 수를 카운트 하기위한 채널을 지정하는 명령어입니다.')
                 .setColor('GREEN')
-                .addField(`[ ${prefix}카운트 설정 <채널멘션> ]`, "", true)
-                .addField(`[ ${prefix}카운트 변경 <채널멘션> ]`, "역할의 자동 부여를 중단합니다.", true)
-                .addField(`[ ${prefix}카운트 취소 ]`, "", true)
-                .addField(`[ ${prefix}카운트 이름 <변경할 이름> ]`, "", true)
+                .addField(`[ ${prefix}카운트 설정 <채널멘션> ]`, "\u200B")
+                .addField(`[ ${prefix}카운트 변경 <채널멘션> ]`, "역할의 자동 부여를 중단합니다.")
+                .addField(`[ ${prefix}카운트 취소 ]`, "\u200B")
+                .addField(`[ ${prefix}카운트 이름 <변경할 이름> ]`, "\u200B")
             return message.channel.send({ embed: embed });
         } else if (args[0] === "설정") {
             let channel = message.mentions.channels.first();

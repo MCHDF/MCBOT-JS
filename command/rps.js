@@ -41,7 +41,7 @@ module.exports = {
             .setColor('#95fcff')
             .setAuthor(`도전자 - ${message.author.tag}`, message.author.avatarURL({ size: 2048 }))
             .setTitle('미니게임 - 가위바위보')
-            .setDescription('아래의 3개 반응 중 하나를 골라주세요!')
+            .setDescription('아래의 3개 버튼 중 하나를 골라주세요!')
             .setTimestamp();
 
         message.channel.send({ 

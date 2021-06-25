@@ -10,8 +10,8 @@ module.exports = {
                 .setTitle("필터제외")
                 .setDescription('욕설 필터링을 제외할 채널을 지정하는데 사용하는 명령어입니다.')
                 .setColor('GREEN')
-                .addField(`[ ${prefix}필터제외 지정 ]`, "사용한 채널을 욕설 필터링 제외 채널로 지정해요!", true)
-                .addField(`[ ${prefix}필터제외 취소 ]`, "욕설 필터링 기능을 중단시켜요!", true)
+                .addField(`[ 지정 ]`, "\`\`\`사용한 채널을 욕설 필터링 제외 채널로 지정해요!\`\`\`")
+                .addField(`[ 취소 ]`, "\`\`\`욕설 필터링 기능을 중단시켜요!\`\`\`")
             return message.channel.send({ embed: embed });
         }
 
@@ -25,10 +25,10 @@ module.exports = {
                 let exceptionCh = rows[0].exceptionCh;
                 let guildId = rows[0].guildId;
                 if (target === exceptionCh) {
-                    message.channel.send(":exclamation: 이미 현재 채널로 지정되어있어요!").then(m => m.delete({ timeout: 3000 }));
+                    return message.channel.send(":exclamation: 이미 현재 채널로 지정되어있어요!").then(m => m.delete({ timeout: 3000 }));
                 } else {
                     con.query(`UPDATE Guilds SET exceptionCh ='${target}' WHERE guildId ='${guildId}'`);
-                    message.channel.send(":white_check_mark: 필터링 제외 채널이 설정되었어요!").then(m => m.delete({ timeout: 3000 }));
+                    return message.channel.send(":white_check_mark: 필터링 제외 채널이 설정되었어요!").then(m => m.delete({ timeout: 3000 }));
                 }
             });
         }
