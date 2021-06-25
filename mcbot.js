@@ -5,7 +5,7 @@ const bot = new Discord.Client();
 require('discord-buttons')(bot)
 const Badwords = require("./jsons/fiterWords.json");
 const log = require('./config/logger.js');
-
+const delLog = require('./config/delMsgLogger');
 const swearLog = require('./config/swearLogger');
 require('dotenv').config();
 var StatsD = require('hot-shots');
@@ -43,6 +43,7 @@ function generatexp() {
 const chooseArr = ["🖐", "✌", "✊"]
 
 bot.on('clickButton', async (button) => {
+
     if (button.id === 'rps_1' || button.id === 'rps_2' || button.id === 'rps_3') {
 
         const botchoice = chooseArr[Math.floor(Math.random() * chooseArr.length)];
@@ -147,7 +148,9 @@ async function deletedMessage(message, bot) {
         .setDescription(message.content)
         .setTimestamp()
         .setColor("RED")
-        ch.send(embed)
+    delLog.info(`[지워짐] ${message.content}`)
+    console.log(`[Message Del] ${message.content}`)
+    ch.send(embed)
     if (attachment) {
         for (let i = 0; i < attachment.array().length; i++) {
             ch.send(attachment.array()[i])
@@ -229,6 +232,7 @@ bot.on('message', async message => {
     let msgURL = Badwords.msgURL;
     let foundText = false;
 
+    
     // 서버 멤버 카운트
     let Guild = message.guild.id;
     con.query(`select * from GuildConfigurable where guildId = '${Guild}';`, (err, rows) => {

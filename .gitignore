@@ -108,5 +108,6 @@ README_imgs/
 test.js
 verification.js
 swearFilterLogs/
+messageDeleteLog/
 .idea/
 ./command/sql.js
