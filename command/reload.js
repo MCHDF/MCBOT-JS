@@ -16,11 +16,15 @@ module.exports = {
             try {
                 delete require.cache[require.resolve(`./${commandName}.js`)]
                 bot.commands.delete(commandName)
-                const pull = require(`./${commandName}.js`)
+                var pull = require(`./${commandName}.js`)
                 bot.commands.set(pull.help.name, pull)
+                pull.help.aliases.forEach(alias => {
+                    bot.aliases.set(alias, pull.help.name)
+                })
             } catch (e) {
                 return message.channel.send(`리로드 불가 : \`${commandName}.js\`\n\`\`\`${e}\`\`\``)
             }
+            console.log(`[ Reload Command ] \'${commandName}\'`)
             message.channel.send(`파일 리로드 : \`${commandName}.js\``)
         }
     }
