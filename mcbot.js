@@ -127,13 +127,8 @@ bot.on('messageDelete', async message => {
     } else {
         let adminRole = message.member.roles.cache.some((role) => role.id === "671989651484966912");
         let staffRole = message.member.roles.cache.some((role) => role.id === "671990343780270090");
-        let light_bear = message.member.id === "460279565789691916";
         
         if(adminRole || staffRole) {
-            if(light_bear) {
-                await deletedMessage(message, bot);
-                return;
-            }
             return;
         } 
         await deletedMessage(message, bot);
@@ -146,10 +141,10 @@ async function deletedMessage(message, bot) {
     let embed = new Discord.MessageEmbed()
         .setAuthor(message.member.displayName, message.author.displayAvatarURL())
         .setDescription(message.content)
+        .addField('[ Ch ]', `<#${message.channel.id}>`)
         .setTimestamp()
         .setColor("RED")
-    delLog.info(`[지워짐] ${message.content}`)
-    console.log(`[Message Del] ${message.content}`)
+    delLog.info(`[지워짐] ${message.member.displayName}: ${message.content} in ${message.channel.name}`)
     ch.send(embed)
     if (attachment) {
         for (let i = 0; i < attachment.array().length; i++) {
@@ -230,6 +225,7 @@ bot.on('message', async message => {
     let filterwords = Badwords.BADWORDS;
     let zbcFilter = Badwords.BADWORDS_zbc;
     let msgURL = Badwords.msgURL;
+    let scam = Badwords.scam;
     let foundText = false;
 
     
@@ -253,7 +249,7 @@ bot.on('message', async message => {
         }
     });
     //─────────────────────────────────────────────────────────────────────────────────────────────────────────────
-    // 욕설 필터링
+    // 스팸 단어 필터링
     let messagechid = message.channel.id;
 
     function filterLog(find) {
@@ -274,18 +270,18 @@ bot.on('message', async message => {
 
                     if (!logCh) {
                         message.delete();
-                        return message.reply("(이쁜말)");
+                        return message.reply("무슨말을 하려는거죠?");
                     } else {
                         let embed = new Discord.MessageEmbed()
-                            .setTitle("욕설 필터링")
-                            .setDescription(`\`${message.author.username}\`님이 욕설을 사용하였습니다.`)
+                            .setTitle("필터링")
+                            .setDescription(`\`${message.author.username}\`님이 아래의 단어를 사용하여 필터링 되었습니다.`)
                             .setColor("RED")
                             .setTimestamp()
                             .addField("[ 사용 단어 ]", `${message.content}`)
                             .addField("[ 태그 ]", `<@${message.author.id}>`)
                         ch.send(embed);
                         message.delete();
-                        return message.reply("(이쁜말)");
+                        return message.reply("무슨말을 하려는거죠?");
                     }
                 }
             });
@@ -305,6 +301,12 @@ bot.on('message', async message => {
             }
         }
 
+        for (var j in scam) {
+            if (message.content.toLowerCase().includes(scam[j].toLowerCase())) {
+                foundText = true;
+            }
+        }
+
         filterLog(foundText);
 
     } else {
@@ -317,6 +319,12 @@ bot.on('message', async message => {
         for (var k in msgURL) {
             if (message.content.toLowerCase().includes(msgURL[k].toLowerCase())) {
                 foundText = false;
+            }
+        }
+
+        for (var j in scam) {
+            if (message.content.toLowerCase().includes(scam[j].toLowerCase())) {
+                foundText = true;
             }
         }
 
@@ -342,7 +350,7 @@ bot.on('message', async message => {
             let nxtlvl = lvl * 300
 
             if (nxtlvl <= xp) {
-                con.query(`UPDATE xp SET xp = 0 WHERE guildId = '${message.guild.id}' AND id = ${message.author.id};`);
+                con.query(`UPDATE xp SET xp = ${xp - nxtlvl} WHERE guildId = '${message.guild.id}' AND id = ${message.author.id};`);
                 con.query(`UPDATE xp SET lvl = ${lvl + 1} WHERE guildId = '${message.guild.id}' AND id = ${message.author.id};`);
                 let embed = new Discord.MessageEmbed()
                     .setTitle('[ Level UP! ]')
