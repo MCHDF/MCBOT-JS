@@ -24,6 +24,11 @@
     <img alt="CodeFactor" src="https://img.shields.io/codefactor/grade/github/MCHDF/MCBOT?style=for-the-badge&logo=appveyor.svg">
   </a>
 </p>
+<center>
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMCHDF%2FMCBOT.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2FMCHDF%2FMCBOT?ref=badge_small)
+
+</center>
 
 ## 주의
 
