@@ -68,7 +68,6 @@
     ],
     "BADWORDS_zbc": [
         "@everyone",
-        "steamcommunity",
         "ㅅㅂ",
         "시발",
         "ㅅ1ㅂ",
@@ -138,5 +137,13 @@
         "ㅋㅋㄹㅃㅂ",
         "ㅋㅋㄹㅂㅂ",
         "ㄹㅇㅋㅋ"
+    ],
+    "scam": [
+        "steamcommunytu",
+        "steancommunity",
+        "stearncomminuty",
+        "stea",
+        "stearn",
+        "steam"
     ]
 }
